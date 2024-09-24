@@ -1,0 +1,144 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+
+<div class="w-full h-full bg-white rounded-lg">
+    <div class="flex justify-between mx-12 pt-6">
+        <h3 class="font-bold bg-amber-500 text-white px-4 rounded-lg py-1">
+          Pending Certificates
+        </h3>
+        </div>
+        
+        {% if pending_certificates %}
+
+<table class="table w-full mt-4">
+    <!-- TABLE HEAD -->
+    <thead class="table-head bg-amber-500 h-14 ">
+        <tr class="bg-gray-400 ">
+            <th>#</th>
+            <th>Volunteer</th>
+            <th>Contact Number</th>
+            <th>Location</th>
+            <th>State Committee</th>
+            <th>Amount</th>
+            <th>Estimate</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <!-- TABLE HEAD ENDS -->
+    
+    <!-- TABLE BODY -->
+    <tbody >
+        <!-- ITEM -->
+       
+       
+   
+        
+       {% for pending_certificate in pending_certificates %}
+   
+        
+        
+        
+        <tr class="odd:bg-gray-100 even:bg-white ">
+            <!-- NAME -->
+            <th class="py-4"><p class="text-black font-semibold text-base">{{forloop.counter}}</p></th>
+            <th class="py-4"><p class="text-black font-semibold text-base">{{pending_certificate.volunteer}}</p></th>
+            <th class="py-4"><p class="text-black font-semibold text-base">{{pending_certificate.volunteer.phone}}</p></th>
+            <th class="py-4"><p class="text-black font-semibold text-base">{{pending_certificate.volunteer.location}}</p></th>
+            <th class="py-4"><p class="text-black font-semibold text-base">{{pending_certificate.volunteer.state}}</p></th>
+            <th class="py-4"><p class="text-black font-semibold text-base"><i class="fa-regular fa-circle-check text-green-600"></i>₹ {{pending_certificate.amount}} </p></th>
+            <th class="py-4"><img src="{{pending_certificate.estimate.url}}" width="70" class="rounded-lg" alt=""></th>
+            <th class="py-4">
+                
+                <a href="{% url 'approve-certificate' pending_certificate.id %}" class=" border border-green-600 text-green-600 rounded-lg px-4 py-1 hover:bg-green-600 mr-4 hover:text-white font-semibold text-sm">Approve</a>
+                <a href="{% url 'reject-certificate' pending_certificate.id %}" class=" border border-red-600 text-red-600 rounded-lg px-4 py-1 hover:bg-red-600 hover:text-white font-semibold text-sm">Reject</a>
+            </th>
+        </tr>
+      
+        {% endfor %}
+        
+       
+       
+    </tbody>
+    <!-- TABLE BODY ENDS -->
+</table>
+{% else %}
+<div class="w-full h-32 bg-gray-200/70 flex justify-center items-center mt-6">
+    <h3 class="text-xl font-bold opacity-60">No Pending Certificates</h3>
+</div>
+{% endif %}
+
+<div class="flex justify-between mx-12 pt-6">
+    <h3 class="font-bold bg-gray-500 text-white px-4 rounded-lg py-1">
+      Recent Certificates
+    </h3>
+    </div>
+    
+    {% if recent_certificates %}
+
+<table class="table w-full mt-4">
+<!-- TABLE HEAD -->
+<thead class="table-head bg-amber-500 h-14 ">
+    <tr class="bg-gray-400 ">
+        <th>#</th>
+        <th>Volunteer</th>
+        <th>Contact Number</th>
+        <th>Location</th>
+        <th>State Committee</th>
+        <th>Amount</th>
+        <th>Estimate</th>
+        <th>Status</th>
+    </tr>
+</thead>
+
+<!-- TABLE HEAD ENDS -->
+
+<!-- TABLE BODY -->
+<tbody >
+    <!-- ITEM -->
+   
+   
+
+    
+   {% for recent_certificate in recent_certificates %}
+
+    
+    
+    
+    <tr class="odd:bg-gray-100 even:bg-white ">
+        <!-- NAME -->
+        <th class="py-4"><p class="text-black font-semibold text-base">{{forloop.counter}}</p></th>
+        <th class="py-4"><p class="text-black font-semibold text-base">{{recent_certificate.volunteer}}</p></th>
+        <th class="py-4"><p class="text-black font-semibold text-base">{{recent_certificate.volunteer.phone}}</p></th>
+        <th class="py-4"><p class="text-black font-semibold text-base">{{recent_certificate.volunteer.location}}</p></th>
+        <th class="py-4"><p class="text-black font-semibold text-base">{{recent_certificate.volunteer.state}}</p></th>
+        <th class="py-4"><p class="text-black font-semibold text-base"><i class="fa-regular fa-circle-check text-green-600"></i>₹ {{recent_certificate.amount}} </p></th>
+        <th class="py-4"><img src="{{recent_certificate.estimate.url}}" width="70" class="rounded-lg" alt=""></th>
+        <th class="py-4">
+            {% if recent_certificate.status == 1 %}
+            <p class="text-green-600 font-semibold text-base">Approved</p>
+            {% elif recent_certificate.status == 2 %}
+            <p class="text-red-600 font-semibold text-base">Rejected</p>
+            {% endif %} 
+        </th>
+    </tr>
+  
+    {% endfor %}
+    
+   
+   
+</tbody>
+<!-- TABLE BODY ENDS -->
+</table>
+{% else %}
+<div class="w-full h-32 bg-gray-200/70 flex justify-center items-center mt-6">
+<h3 class="text-xl font-bold opacity-60">No Recent Certificates</h3>
+</div>
+{% endif %}
+    </div>
+
+</div>
+
+{% endblock content %}

@@ -1,0 +1,250 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<div class="w-full h-full bg-white rounded-lg">
+
+    <!-- TITLE -->
+
+    <div class="flex justify-between mx-12 pt-6">
+        <h3 class="font-bold bg-amber-500 text-white px-4 rounded-lg py-1">
+          Pending Needs
+        </h3>
+        
+        <!-- <a href="#" class="border border-stone-950 rounded-lg px-4 py-1 dropshadow text-zinc-900 font-medium hover:bg-black hover:text-white">Add Volunteer</a> -->
+    </div>
+
+    <!-- TABLE STARTS -->
+   
+   <!--  <h3 class="mx-12 mt-3 bg-amber-500 text-white text-sm font-bold px-2 py-2 w-[180px] text-center rounded-lg">Pending Requests</h3> -->
+    
+{% if needs %}
+
+<table class="table w-full mt-4">
+    <!-- TABLE HEAD -->
+    <thead class="table-head bg-amber-500 h-14 ">
+        <tr class="bg-gray-400 ">
+            <th>#</th>
+            <th>Volunteer</th>
+            <th>Contact Number</th>
+            <th>Location</th>
+            <th>Requirements</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <!-- TABLE HEAD ENDS -->
+    
+    <!-- TABLE BODY -->
+    <tbody >
+        <!-- ITEM -->
+       
+       
+   
+        
+       {% for need in needs %}
+   
+        
+        
+        
+        <tr class="odd:bg-gray-100 even:bg-white ">
+            <!-- NAME -->
+            <th class="py-4"><p class="text-black font-semibold text-base">{{forloop.counter}}</p></th>
+            <th class="py-4"><p class="text-black font-semibold text-base">{{need.host.name}}</p></th>
+            <th class="py-4"><p class="text-black font-semibold text-base">{{need.host.phone}}</p></th>
+            <th class="py-4"><p class="text-black font-semibold text-base">{{need.host.location}}</p></th>
+            <th class="py-4"><p class="text-black font-semibold text-base">{{need.requirements}}</p></th>
+            <th class="py-4"><p class="text-black font-semibold text-base"><i class="fa-regular fa-circle-check text-green-600"></i>Verified by {{need.state_committee.name}} <span  class="text-sm opacity-50">(1m ago)</span></p></th>
+            <th class="py-4">
+                <!-- <a href="#" class="border border-green-600 rounded-lg px-4 py-1 bg-red mr-4 test-xs font-normal hover:bg-green-600  hover:text-white">Edit</a> -->
+                <a href="{% url 'needs-verify-by-state' need.id %}" class=" border border-green-600 text-green-600 rounded-lg px-4 py-1 hover:bg-green-600 mr-4 hover:text-white font-semibold text-sm">Approve</a>
+                <a href="{% url 'needs-reject-by-state' need.id %}" class=" border border-red-600 text-red-600 rounded-lg px-4 py-1 hover:bg-red-600 hover:text-white font-semibold text-sm">close</a>
+            </th>
+        </tr>
+      
+        {% endfor %}
+        
+       
+       
+    </tbody>
+    <!-- TABLE BODY ENDS -->
+</table>
+{% else %}
+<div class="w-full h-32 bg-gray-200/70 flex justify-center items-center mt-6">
+    <h3 class="text-xl font-bold opacity-60">No Pending Requests</h3>
+</div>
+{% endif %}
+
+
+
+<!-- ACTIVE NEEDS -->
+
+ <!-- TITLE -->
+
+ <div class="flex justify-between mx-12 pt-6">
+    <h3 class="font-bold bg-green-600 text-white px-4 rounded-lg py-1">
+     Active Needs
+    </h3>
+    
+    <!-- <a href="#" class="border border-stone-950 rounded-lg px-4 py-1 dropshadow text-zinc-900 font-medium hover:bg-black hover:text-white">Add Volunteer</a> -->
+</div>
+
+{% if open_needs %}
+
+
+
+<table class="table w-full mt-4">
+    <!-- TABLE HEAD -->
+    <thead class="table-head bg-amber-500 h-14 ">
+        <tr class="bg-gray-400 ">
+            <th>#</th>
+            <th>Volunteer</th>
+            <th>Contact Number</th>
+            <th>Location</th>
+            <th>Requirements</th>
+            {% if request.user.user_type == 0 %}
+            <th>State Committee</th>
+            {% endif %}
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <!-- TABLE HEAD ENDS -->
+    
+    <!-- TABLE BODY -->
+    <tbody >
+        <!-- ITEM -->
+       
+       
+   
+        
+       {% for need in open_needs %}
+   
+        
+        
+        
+        <tr class="odd:bg-gray-100 even:bg-white ">
+            <!-- NAME -->
+            <th class="py-4"><p class="text-black font-semibold text-base">{{forloop.counter}}</p></th>
+            <th class="py-4"><p class="text-black font-semibold text-base">{{need.host.name}}</p></th>
+            <th class="py-4"><p class="text-black font-semibold text-base">{{need.host.phone}}</p></th>
+            <th class="py-4"><p class="text-black font-semibold text-base">{{need.host.location}}</p></th>
+            <th class="py-4"><p class="text-black font-semibold text-base">{{need.requirements}}</p></th>
+            {% if request.user.user_type == 0 %}
+            <th class="py-4"><p class="text-black font-semibold text-base">{{need.state_committee.name}}</p></th>
+            {% endif %}
+            <th class="py-4"><p class="text-green-600 font-semibold text-base">Open <span  class="text-sm opacity-50">({{need.updated|timesince}} ago)</span></p></th>
+            <th class="py-4">
+                <!-- <a href="#" class="border border-green-600 rounded-lg px-4 py-1 bg-red mr-4 test-xs font-normal hover:bg-green-600  hover:text-white">Edit</a> -->
+                <!-- <a href="{% url 'needs-verify-by-state' need.id %}" class=" border border-green-600 text-green-600 rounded-lg px-4 py-1 hover:bg-green-600 mr-4 hover:text-white font-semibold text-sm">Approve</a> -->
+                <a href="{% url 'needs-reject-by-state' need.id %}" class=" border border-red-600 text-red-600 rounded-lg px-4 py-1 hover:bg-red-600 hover:text-white font-semibold text-sm">close</a>
+            </th>
+        </tr>
+      
+        {% endfor %}
+        
+       
+       
+    </tbody>
+    <!-- TABLE BODY ENDS -->
+</table>
+{% else %}
+<div class="w-full h-32 bg-gray-200/70 flex justify-center items-center mt-6">
+    <h3 class="text-xl font-bold opacity-60">No Active Requests</h3>
+</div>
+{% endif %}
+
+ <!-- TITLE -->
+
+ <div class="flex justify-between mx-12 mt-6 pt-6">
+    <h3 class="font-bold bg-red-500 text-white px-4 rounded-lg py-1">
+     Closed Needs
+    </h3>
+    
+    <!-- <a href="#" class="border border-stone-950 rounded-lg px-4 py-1 dropshadow text-zinc-900 font-medium hover:bg-black hover:text-white">Add Volunteer</a> -->
+</div>
+
+{% if closed_needs %}
+<table class="table w-full mt-4">
+    <!-- TABLE HEAD -->
+    <thead class="table-head bg-amber-500 h-14 ">
+        <tr class="bg-gray-400 ">
+            <th>#</th>
+            <th>Volunteer</th>
+            <th>Contact Number</th>
+            <th>Location</th>
+            <th>Requirements</th>
+            {% if request.user.user_type == 0 %}
+            <th>State Committee</th>
+            {% endif %}
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <!-- TABLE HEAD ENDS -->
+    
+    <!-- TABLE BODY -->
+    <tbody >
+        <!-- ITEM -->
+       
+       
+   
+        
+       {% for need in closed_needs %}
+   
+        
+        
+        
+        <tr class="odd:bg-gray-100 even:bg-white ">
+            <!-- NAME -->
+            <th class="py-4"><p class="text-black font-semibold text-base">{{forloop.counter}}</p></th>
+            <th class="py-4"><p class="text-black font-semibold text-base">{{need.host.name}}</p></th>
+            <th class="py-4"><p class="text-black font-semibold text-base">{{need.host.phone}}</p></th>
+            <th class="py-4"><p class="text-black font-semibold text-base">{{need.host.location}}</p></th>
+            <th class="py-4"><p class="text-black font-semibold text-base">{{need.requirements}}</p></th>
+            {% if request.user.user_type == 0 %}
+            <th class="py-4"><p class="text-black font-semibold text-base">{{need.state_committee.name}}</p></th>
+            {% endif %}
+            <th class="py-4"><p class="text-red-500 font-bold text-base">Closed by
+
+                 {% if need.rejected_by == 0 %}
+                 <p>Admin </p>
+                 {% elif need.rejected_by == 1 %}
+                 <p>{{need.state_committee.name}} State Committee</p>
+                 {% elif need.rejected_by == 2 %}
+                <p> {{need.host.name}}</p>
+                 {% endif %}
+
+                 <span  class="text-sm opacity-50">({{need.updated|timesince}} ago)</span></p></th>
+            <th class="py-4">
+                <!-- <a href="#" class="border border-green-600 rounded-lg px-4 py-1 bg-red mr-4 test-xs font-normal hover:bg-green-600  hover:text-white">Edit</a> -->
+                <!-- <a href="{% url 'needs-verify-by-state' need.id %}" class=" border border-green-600 text-green-600 rounded-lg px-4 py-1 hover:bg-green-600 mr-4 hover:text-white font-semibold text-sm">Approve</a> -->
+                <a href="{% url 'delete-needs' need.id %}" class=" border border-red-600 text-red-600 rounded-lg px-4 py-1 hover:bg-red-600 hover:text-white font-semibold text-sm">Delete</a>
+            </th>
+        </tr>
+      
+        {% endfor %}
+        
+       
+       
+    </tbody>
+    <!-- TABLE BODY ENDS -->
+</table>
+{% else %}
+
+<div class="w-full h-32 bg-gray-200/70 flex justify-center items-center mt-6">
+    <h3 class="text-xl font-bold opacity-60">No Closed Requests</h3>
+</div>
+
+{% endif %}
+
+
+    
+</div>
+
+
+
+{% endblock content %}

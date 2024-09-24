@@ -1,0 +1,93 @@
+{% extends 'home.html' %}
+
+{% block content %}
+<div class="w-full h-full bg-white rounded-lg">
+
+    <!-- TITLE -->
+
+    <div class="flex justify-between mx-12 pt-6">
+        <h3 class="font-bold bg-gray-200 px-4 rounded-lg py-1">
+            Task Assigend By State
+        </h3>
+       
+    </div>
+
+    <!-- TABLE STARTS -->
+   
+     
+    
+
+
+<table class="table w-full mt-4">
+    <!-- TABLE HEAD -->
+    <thead class="table-head bg-amber-500 h-14 ">
+        <tr class="bg-gray-400 ">
+            <th>#</th>
+            <th>Assigned By</th>
+            <th>Alert</th>
+            <th>Task Description </th>
+            <th>Action </th>
+           
+           
+           
+           
+        </tr>
+    </thead>
+
+    <!-- TABLE HEAD ENDS -->
+    
+    <!-- TABLE BODY -->
+    <tbody >
+        <!-- ITEM -->
+      {% for task in tasks %}
+       
+        <tr class="odd:bg-gray-100 even:bg-white">
+            <!-- NAME -->
+            <th class="py-4"><p class="text-black font-semibold text-base">{{forloop.counter}}</p></th>
+            <th class="py-4">
+                <p class="text-black font-semibold text-base">{{ task.userid.username }}</p>
+            </th>
+            <th class="py-4">
+                <p class="text-black font-semibold text-base">{{ task.alertid.content }}</p>
+            </th>
+            <th class="py-4"><p class="text-black font-semibold text-base">{{ task.taskdescriprion }}</p></th>
+            <th class="py-4"><a class="mr-12 bg-teal-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" href="{% url 'viewtask' task.id  %}">View Task</a></th>
+            
+           
+            
+           
+        </tr>
+     
+        {% endfor %}
+        
+      
+        
+        
+      
+        
+        
+      
+        
+
+        
+      
+       
+        
+       
+       
+    </tbody>
+    <!-- TABLE BODY ENDS -->
+</table>
+
+
+    
+
+
+    
+</div>
+
+
+
+
+
+{% endblock content %}

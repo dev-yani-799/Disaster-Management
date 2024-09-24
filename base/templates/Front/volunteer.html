@@ -1,0 +1,359 @@
+{% extends 'home.html' %} {% block content %}
+{% load static %}
+<main class="w-screen h-full mt-6">
+  
+  <div class="">
+    <div class="w-full bg-white items-center flex justify-center">
+      <form method="POST" action="" class="drop-shadow items-center justify-center flex">
+        {% csrf_token %}
+        <img src="{% static './img/comp.avif' %}" style="max-width: 100%; height: auto; max-height: 268px;" alt="Image" class="w-1/2 mr-4">
+        <textarea
+        required
+        autofocus
+        class="border p-2 outline-none mt-3 w-1/3"
+        name="requirements"
+        cols="60"
+        rows="2"  
+        placeholder="Tell Us What you Need?"
+    ></textarea><br>
+    
+        <div class="mt-4" style="position: absolute;top:180px;left:570px">
+          <input
+            class="cursor-pointer hover:bg-gray-500/80 text-sm font-bold text-white bg-gray-500 rounded px-20 py-3"
+            type="submit"
+            value="SEND REQUEST" rows="2"  
+          />
+        </div>
+      </form>
+    </div>
+    
+    
+    
+    
+
+    
+  <!-- PENDING NEEDS -->
+
+  <div class="w-full bg-white mt-6">
+    <h1 class="font-bold ml-64 text-xl mt-4 text-stone-600 pt-4">
+      Your Pending Requests
+    </h1>
+
+    {% if pendingNeeds %}
+    <div class="w-[1400px] min-h-[400px] rounded-xl mx-auto mt-4 py-4 px-2">
+      <!-- WRAPPER -->
+
+      {% for pendingNeed in pendingNeeds %}
+      <div
+        class="w-[1000px] h-72 border-2 hover:border-yellow-400 bg-white drop-shadow mx-auto rounded-xl mb-8 py-4 px-8 flex justify-between"
+      >
+        <div>
+          <h1
+            class="border-2 border-yellow-400 text-yellow-400 text-sm font-bold px-6 py-2 w-[130px] text-center rounded-lg"
+          >
+            PENDING
+          </h1>
+
+          <div class="w-[300px] bg-gray-100/50 mt-4 h-32 p-2 rounded-lg">
+            <h1 class="font-semibold opacity-60">Requirements</h1>
+            <p class="p-1 mt-1 font-semibold">{{pendingNeed.requirements}}</p>
+          </div>
+          <div>
+            <p class="mt-6 font-semibold">
+              {{pendingNeed.created|timesince}} ago
+            </p>
+          </div>
+        </div>
+
+        <div class="px-12">
+          <h1 class="text-amber-500 text-sm font-bold px-6 py-2 rounded-lg">
+            CURRENT STATUS
+          </h1>
+          <div class="mt-4">
+            <div class="flex items-center">
+              <i
+                class="fa-regular text-green-500 opacity-70 font-bold mr-2 fa-circle-check"
+              ></i>
+              <p>Requirements Submitted successfully</p>
+            </div>
+
+            <div class="mt-4">
+              {% if pendingNeed.is_verified_by_state == 0 %}
+
+              <div class="flex items-center">
+                <i
+                  class="fa-regular text-gray-300 font-bold mr-2 fa-circle-check"
+                ></i>
+                <p>State Committee Verification Pending...</p>
+              </div>
+              {% elif pendingNeed.is_verified_by_state == 1 %}
+
+              <div class="flex items-center">
+                <i
+                  class="fa-regular text-green-500 font-bold mr-2 fa-circle-check"
+                ></i>
+                <p>Verified by {{volunteer_state}} State Committee</p>
+              </div>
+
+              {% endif %}
+            </div>
+            <div class="mt-4">
+              <div class="flex items-center">
+                <i
+                  class="fa-regular text-gray-300 font-bold mr-2 fa-circle-check"
+                ></i>
+                <p>Admin Verification Pending...</p>
+              </div>
+            </div>
+            <div class="mt-4">
+              <div class="flex items-center">
+                <i
+                  class="fa-regular text-gray-300 font-bold mr-2 fa-circle-check"
+                ></i>
+                <p>Request Opened</p>
+              </div>
+            </div>
+            <div class="mt-4">
+              <div class="flex items-center">
+                <i
+                  class="fa-regular text-gray-300 font-bold mr-2 fa-circle-xmark"
+                ></i>
+                <p>Request Closed</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-[253px] h-[170px]">
+          <!-- MAP CONTAINER -->
+          <!--  <div class="container">
+                <div class="row mt-4">
+                    <div class="col-4">
+                        <label for="">Latitude and Longitude (comma-separated)</label>
+                        <input
+                            type="text"
+                            name="latlong"
+                            id="latlongTextField"
+                            class="form-control"
+                            placeholder="Enter latitudes and longitudes here separated by commas"
+                        />
+                    </div>
+                    <div class="col-2 mt-4">
+                        <button class="btn btn-primary" onclick="updateMap()">Find Places</button>
+                    </div>
+                </div>
+                <div class="row mt-3 mb-5">
+                    <div id="map"></div>
+                </div>
+            </div> -->
+
+          <!-- MAP CONTAINER ENDS -->
+
+          <div class="flex flex-col justify-start gap-8 h-[170px] mt-16 ml-16">
+            <a
+              href="{% url 'delete-needs' pendingNeed.id %}"
+              class="border text-center border-red-500 text-red-500 py-1 hover:bg-red-500 hover:text-white w-[100px] outline-none"
+              >Delete</a
+            >
+            <a
+              href="{% url 'close-needs' pendingNeed.id %}"
+              class="border text-center border-amber-500 text-amber-500 py-1 hover:bg-amber-500 hover:text-white w-[100px] outline-none"
+              >Close</a
+            >
+          </div>
+        </div>
+      </div>
+
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="w-full h-[200px] text-center flex items-center justify-center">
+      <h1 class="font-bold text-xl opacity-60">NO PENDING REQUESTS</h1>
+    </div>
+    {% endif %}
+  </div>
+
+  <!-- ACTIVE NEEDS -->
+
+  <div class="w-full bg-white mt-6">
+    <h1 class="font-bold ml-64 text-xl mt-4 text-stone-600 pt-4">
+      Your Active Requests
+    </h1>
+    {% if activeNeeds %}
+    <div class="w-[1400px] min-h-[400px] rounded-xl mx-auto mt-4 py-4 px-2">
+      <!-- WRAPPER -->
+
+      {% for activeNeed in activeNeeds %}
+      <div
+        class="w-[1000px] h-72 border-2 hover:border-green-500 bg-white drop-shadow mx-auto rounded-xl mb-8 py-4 px-8 flex justify-between"
+      >
+        <div>
+          <h1
+            class="border-2 border-green-500 text-green-500 text-sm font-bold px-6 py-2 w-[100px] text-center rounded-lg"
+          >
+            OPEN
+          </h1>
+
+          <div class="w-[300px] bg-gray-100/50 mt-4 h-32 p-2 rounded-lg">
+            <h1 class="font-semibold opacity-60">Requirements</h1>
+            <p class="p-1 font-semibold mt-1">{{activeNeed.requirements}}</p>
+          </div>
+          <div>
+            <p class="mt-6 font-semibold">
+              {{activeNeed.created|timesince}} ago
+            </p>
+          </div>
+        </div>
+
+        <div class="px-12">
+          <h1 class="text-amber-500 text-sm font-bold px-6 py-2 rounded-lg">
+            CURRENT STATUS
+          </h1>
+          <div class="mt-4">
+            <div class="flex items-center">
+              <i
+                class="fa-regular text-green-500 opacity-70 font-bold mr-2 fa-circle-check"
+              ></i>
+              <p>Requirements Submitted successfully</p>
+            </div>
+
+            <div class="mt-4">
+              <div class="flex items-center">
+                <i
+                  class="fa-regular text-green-400 font-bold mr-2 fa-circle-check"
+                ></i>
+                <p>Verified by {{volunteer_state}} State Committee</p>
+              </div>
+            </div>
+            <div class="mt-4">
+              <div class="flex items-center">
+                <i
+                  class="fa-regular text-green-400 font-bold mr-2 fa-circle-check"
+                ></i>
+                <p>Verified by Admin</p>
+              </div>
+            </div>
+            <div class="mt-4">
+              <div class="flex items-center">
+                <i
+                  class="fa-regular text-green-400 font-bold mr-2 fa-circle-check"
+                ></i>
+                <p>Request Opened</p>
+              </div>
+            </div>
+            <div class="mt-4">
+              <div class="flex items-center">
+                <i
+                  class="fa-regular text-gray-300 font-bold mr-2 fa-circle-xmark"
+                ></i>
+                <p>Request Closed</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-[253px] h-[170px]">
+          <div class="flex flex-col justify-start h-[170px] mt-16 ml-16">
+            <a
+              href="{% url 'close-needs' activeNeed.id %}"
+              class="border text-center border-amber-500 text-amber-500 hover:font-bold py-1 hover:bg-amber-500 hover:text-white w-[100px] outline-none"
+              >Close</a
+            >
+          </div>
+        </div>
+      </div>
+
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="w-full h-[200px] text-center flex items-center justify-center">
+      <h1 class="font-bold text-xl opacity-60">NO ACTIVE REQUESTS</h1>
+    </div>
+    {% endif %}
+  </div>
+
+  <!-- COLSED NEEDS -->
+
+  <div class="w-full bg-white mt-6">
+    <h1 class="font-bold ml-64 text-xl mt-4 text-stone-600 pt-4">
+      Your Closed Requests
+    </h1>
+
+    {% if closedNeeds %}
+    <div class="w-[1400px] min-h-[400px] rounded-xl mx-auto mt-4 py-4 px-2">
+      <!-- WRAPPER -->
+
+      {% for closedNeed in closedNeeds %}
+      <div
+        class="w-[1000px] h-72 border-2 hover:border-red-500 bg-white drop-shadow mx-auto rounded-xl mb-8 py-4 px-8 flex justify-between"
+      >
+        <div>
+          <h1
+            class="border-2 border-red-400 text-red-400 text-sm font-bold px-6 py-2 w-[130px] text-center rounded-lg"
+          >
+            CLOSED
+          </h1>
+
+          <div class="w-[300px] bg-gray-100/50 mt-4 h-32 p-2 rounded-lg">
+            <h1 class="font-semibold opacity-60">Requirements</h1>
+            <p class="p-1 mt-1 font-semibold">{{closedNeed.requirements}}</p>
+          </div>
+          <div>
+            <p class="mt-6 font-semibold">
+              {{closedNeed.created|timesince}} ago
+            </p>
+          </div>
+        </div>
+
+        <div class="px-12">
+          <h1 class="text-amber-500 text-sm font-bold px-6 py-2 rounded-lg">
+            CURRENT STATUS
+          </h1>
+          <div class="mt-4">
+            <div class="flex items-center">
+              <i
+                class="fa-regular text-green-500 opacity-70 font-bold mr-2 fa-circle-check"
+              ></i>
+              <p>Requirements Submitted successfully</p>
+            </div>
+
+            <div class="mt-4">
+              <div class="flex items-center">
+                <i
+                  class="fa-regular text-red-500 font-bold mr-2 fa-circle-xmark"
+                ></i>
+
+                {% if closedNeed.rejected_by == 0 %}
+                <p>Request Closed by Admin</p>
+                {% elif closedNeed.rejected_by == 1 %}
+                <p>Request Closed by {{volunteer_state}} State Committee</p>
+                {% else %}
+                <p>Request Closed by You</p>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-[253px] h-[170px]">
+          <div class="flex flex-col justify-between h-[170px] mt-16 ml-16">
+            <a
+              href="{% url 'delete-needs' closedNeed.id %}"
+              class="border border-red-500 text-red-500 text-center py-1 hover:font-bold hover:bg-red-500 hover:text-white w-[100px] outline-none"
+              >Delete</a
+            >
+          </div>
+        </div>
+      </div>
+
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="w-full h-[200px] text-center flex items-center justify-center">
+      <h1 class="font-bold text-xl opacity-60">NO CLOSED REQUESTS</h1>
+    </div>
+    {% endif %}
+  </div>
+</main>
+
+{% endblock content %}

@@ -1,0 +1,70 @@
+{% extends 'home.html' %} 
+{% block content %}
+
+<div id="leafmap"></div>
+<style>
+    #leafmap { height: 100vh; }
+</style>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () { 
+        var map = L.map('leafmap').setView([8.508187002295253, 76.94543469547108], 6);
+    
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        var marker = L.marker([0, 0]).addTo(map); // Initialize marker with dummy coordinates
+    
+        // Function to fetch weather data based on latitude and longitude
+        function fetchWeather(latitude, longitude) {
+            fetch('https://api.openweathermap.org/data/2.5/weather?lat=' + latitude + '&lon=' + longitude + '&appid=992bf96dbf495b7559c616e26ff65ee3')
+                .then(response => response.json())
+                .then(data => {
+                    var weather = data.weather[0].description;
+                    var temperature = (data.main.temp - 273.15).toFixed(2);
+                    var icon = 'http://openweathermap.org/img/wn/' + data.weather[0].icon + '.png';
+    
+                    L.popup()
+                        .setLatLng([latitude, longitude])
+                        .setContent('<b>Weather:</b> ' + weather + '<br><b>Temperature:</b> ' + temperature + '°C' + '<br><img src="' + icon + '">')
+                        .openOn(map);
+                })
+                .catch(error => console.error('Error fetching weather data:', error));
+        }
+    
+        // Event listener for map click
+        map.on('click', function (e) {
+            var latitude = e.latlng.lat;
+            var longitude = e.latlng.lng;
+    
+            // Update marker position to clicked coordinates
+            marker.setLatLng([latitude, longitude]);
+    
+            // Call fetchWeather function with clicked coordinates
+            fetchWeather(latitude, longitude);
+        });
+    
+        // Check if geolocation is supported by the browser
+        if ('geolocation' in navigator) {
+            navigator.geolocation.getCurrentPosition(position => {
+                var latitude = position.coords.latitude;
+                var longitude = position.coords.longitude;
+    
+                // Set marker to user's current location
+                marker.setLatLng([latitude, longitude]);
+    
+                // Call fetchWeather function with user's current coordinates
+                fetchWeather(latitude, longitude);
+    
+                map.setView([latitude, longitude], 10);
+            }, error => {
+                console.error('Error getting user location:', error);
+            });
+        } else {
+            console.error('Geolocation is not supported by this browser.');
+        }
+    });
+</script>
+
+{% endblock content %}

@@ -1,0 +1,45 @@
+{% extends 'home.html' %} 
+{% block content %}
+<style>
+    #leafmap { height: 100vh; } /* Change 100vw to 100vh for full viewport height */
+</style>
+<body> 
+    <div id="leafmap"></div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.heat@0.2.0/dist/leaflet-heat.min.js"></script>
+
+    <script>
+        var map = L.map('leafmap').setView([8.508187002295253, 76.94543469547108], 6);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Initialize an empty array to store heatmap data
+        var heatmapData = [];
+
+        // Fetch the hotspot coordinates from the Django context variable
+        var hotspotCoordinates = {{ hotspot_coordinates|safe }};
+
+        let lat=''
+        let lng=''
+        // Populate heatmapData with hotspot coordinates
+        hotspotCoordinates.forEach(function(coord) {
+            heatmapData.push([coord.latitude, coord.longitude]);
+            lat = coord.latitude
+            lng = coord.longitude
+        });
+
+        // Create a heatmap layer using Leaflet Heatmap plugin
+        var heatmapLayer = L.heatLayer(heatmapData, {
+            radius: 20, // Adjust the radius of each heatmap point
+            blur: 5, // Decrease blur for sharper heatmap points
+            gradient: { 0.4: 'blue', 0.65: 'lime', 1: 'red' }, // Customize heatmap colors
+            maxOpacity: 0.8, // Set maximum opacity for heatmap points
+        }).addTo(map);
+ 
+        map.setView([lat, lng], 15);
+    </script>
+</body>
+</html>
+{% endblock content %}

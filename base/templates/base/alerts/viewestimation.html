@@ -1,0 +1,100 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<div class="w-full h-full bg-white rounded-lg">
+
+    <!-- TITLE -->
+
+    <div class="flex justify-between mx-12 pt-6">
+        <h3 class="font-bold bg-gray-200 px-4 rounded-lg py-1">
+            View Estimation of Volunteers 
+        </h3>
+       
+    </div>
+
+    <!-- TABLE STARTS -->
+   
+     
+    
+
+
+<table class="table w-full mt-4">
+    <!-- TABLE HEAD -->
+    <thead class="table-head bg-amber-500 h-14 ">
+        <tr class="bg-gray-400 ">
+            <th>#</th>
+            <th>User Name</th>
+            <th>Estimated Amount</th>
+            <th>Bill</th>
+           
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <!-- TABLE HEAD ENDS -->
+    
+    <!-- TABLE BODY -->
+    <tbody >
+        <!-- ITEM -->
+       {% for data in data %}
+       
+        <tr class="odd:bg-gray-100 even:bg-white">
+            <!-- NAME -->
+            <th class="py-4"><p class="text-black font-semibold text-base">{{ forloop.counter }}</p></th>
+            <th class="py-4">
+                <p class="text-black font-semibold text-base">{{ data.userid.name }}</p>
+            </th>
+            <th class="py-4"><p class="text-black font-semibold text-base">{{ data.amount }}</p></th>
+            <th class="py-4"><img src="{{ data.bill.url }}" class="text-black font-semibold text-base" width="100" height="auto"></th>
+            
+           
+            
+            <th class="py-4">
+                {% if data.status == 1 %}
+                <button class="btn-btn-primary" disabled>Approved</button>
+                <a href="{% url 'reject_estimate' data.id %}" class="outline-none border border-red-600 text-red-600 rounded-lg px-4 py-1 hover:bg-red-600 hover:text-white text-sm font-semibold">Reject</a>
+           {% elif data.status == 2 %}
+           <button class="btn-btn-primary" disabled>Rejected</button>
+                <a href="{% url 'approve_estimate' data.id %}" class="border border-green-600 text-green-600 rounded-lg px-4 py-1 bg-red mr-4 text-sm font-semibold hover:bg-green-600 hover:text-white">Approve</a>
+           {% else %}  
+           
+           <a href="{% url 'approve_estimate' data.id %}" class="border border-green-600 text-green-600 rounded-lg px-4 py-1 bg-red mr-4 text-sm font-semibold hover:bg-green-600 hover:text-white">Approve</a>
+           <a href="{% url 'reject_estimate' data.id %}" class="outline-none border border-red-600 text-red-600 rounded-lg px-4 py-1 hover:bg-red-600 hover:text-white text-sm font-semibold">Reject</a>
+           {% endif %}
+        </th>
+        </tr>
+        {% endfor %}
+
+        
+      
+        
+        
+      
+        
+        
+      
+        
+
+        
+      
+       
+        
+       
+       
+    </tbody>
+    <!-- TABLE BODY ENDS -->
+</table>
+
+
+    
+
+
+    
+</div>
+
+
+
+
+
+{% endblock content %}

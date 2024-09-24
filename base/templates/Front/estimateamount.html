@@ -1,0 +1,115 @@
+{% extends 'home.html' %} {% block content %}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<style>
+    body{
+        background: -webkit-linear-gradient(left, #0072ff, #00c6ff);
+    }
+    .contact-form{
+        background: #fff;
+        margin-top: 10%;
+        margin-bottom: 5%;
+        width: 70%;
+    }
+    .contact-form .form-control{
+        border-radius:1rem;
+    }
+    .contact-image{
+        text-align: center;
+    }
+    .contact-image img{
+        border-radius: 6rem;
+        width: 11%;
+        margin-top: -3%;
+        transform: rotate(29deg);
+    }
+    .contact-form form{
+        padding: 14%;
+    }
+    .contact-form form .row{
+        margin-bottom: -7%;
+    }
+    .contact-form h3{
+        margin-bottom: 8%;
+        margin-top: -10%;
+        text-align: center;
+        color: #0062cc;
+    }
+    .contact-form .btnContact {
+        width: 50%;
+        border: none;
+        border-radius: 1rem;
+        padding: 1.5%;
+        background: #dc3545;
+        font-weight: 600;
+        color: #fff;
+        cursor: pointer;
+    }
+    .btnContactSubmit
+    {
+        width: 50%;
+        border-radius: 1rem;
+        padding: 1.5%;
+        color: #fff;
+        background-color: #0062cc;
+        border: none;
+        cursor: pointer;
+    }
+</style>
+
+<div class="container contact-form">
+    <div class="contact-image">
+        <img src="https://image.ibb.co/kUagtU/rocket_contact.png" alt="rocket_contact" style="position: absolute; left: 700px; top: 195px;">
+    </div>
+    <form method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+        {% csrf_token %}
+        <h3>Amount Estimation</h3>
+        <div class="row justify-content-center"> 
+            <div class="col-md-6">
+                <div class="form-group">
+                    <input type="number" name="amount" id="amount" class="form-control" placeholder="Enter your estimate amount *" value="" />
+                    <div id="amountError" class="text-danger hidden">Please enter the amount.</div>
+                </div>
+                <div class="form-group">
+                    <input type="file" name="bill" id="bill" class="form-control" />
+                    <div id="billError" class="text-danger hidden">Please select a bill file.</div>
+                </div>
+                <div class="form-group text-center">
+                    <input type="submit" class="btnContact btn btn-primary" value="Send" />
+                </div>
+            </div>
+        </div>
+    </form>
+    
+    <script>
+        function validateForm() {
+            var amount = document.getElementById('amount').value.trim();
+            var bill = document.getElementById('bill').value.trim();
+    
+            var amountError = document.getElementById('amountError');
+            var billError = document.getElementById('billError');
+    
+            // Reset previous error messages
+            amountError.classList.add('hidden');
+            billError.classList.add('hidden');
+    
+            var isValid = true;
+    
+            if (amount === '') {
+                amountError.classList.remove('hidden');
+                isValid = false;
+            }
+    
+            if (bill === '') {
+                billError.classList.remove('hidden');
+                isValid = false;
+            }
+    
+            return isValid;
+        }
+    </script>
+    
+
+
+{% endblock content %}

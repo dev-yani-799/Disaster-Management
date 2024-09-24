@@ -1,0 +1,103 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="w-full h-full bg-white rounded-lg">
+
+    <!-- TITLE -->
+
+    <div class="flex justify-between mx-12 pt-6">
+        <h3 class="font-bold bg-gray-200 px-4 rounded-lg py-1">
+            View Estimation of Volunteers 
+        </h3>
+       
+    </div>
+
+    <!-- TABLE STARTS -->
+   
+     
+    
+
+
+<table class="table w-full mt-4">
+    <!-- TABLE HEAD -->
+    <thead class="table-head bg-amber-500 h-14 ">
+        <tr class="bg-gray-400 ">
+            <th>#</th>
+            <th>User Name</th>
+            <th>Address</th>
+            <th>Claim Type </th>
+            <th>Description</th>
+            <th>Image</th>
+           
+           
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <!-- TABLE HEAD ENDS -->
+    
+    <!-- TABLE BODY -->
+    <tbody >
+        <!-- ITEM -->
+       {% for data in data %}
+       
+        <tr class="odd:bg-gray-100 even:bg-white">
+            <!-- NAME -->
+            <th class="py-4"><p class="text-black font-semibold text-base">{{ forloop.counter }}</p></th>
+            <th class="py-4">
+                <p class="text-black font-semibold text-base">{{ data.claimname }}</p>
+            </th>
+            <th class="py-4">
+                <p class="text-black font-semibold text-base">{{ data.address }}</p>
+            </th>
+            <th class="py-4"><p class="text-black font-semibold text-base">{{ data.claimtype }}</p></th>
+            <th class="py-4"><p class="text-black font-semibold text-base">{{ data.description }}</p></th>
+           
+          {% if data.image %}
+
+            <th class="py-4"><img src="{{ data.image.url }}" class="text-black font-semibold text-base" width="100" height="auto"></th>
+            {% else %}
+            mo files uploaded
+            {% endif %}
+           
+            
+            <th class="py-4">
+              
+           <a href="" class="border border-green-600 text-green-600 rounded-lg px-4 py-1 bg-red mr-4 text-sm font-semibold hover:bg-green-600 hover:text-white">Approve</a>
+          
+        </th>
+        </tr>
+        {% endfor %}
+
+        
+      
+        
+        
+      
+        
+        
+      
+        
+
+        
+      
+       
+        
+       
+       
+    </tbody>
+    <!-- TABLE BODY ENDS -->
+</table>
+
+
+    
+
+
+    
+</div>
+
+
+
+
+
+{% endblock content %}

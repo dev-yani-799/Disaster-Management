@@ -1,0 +1,42 @@
+{% extends 'home.html' %} {% block content %}{% load static %}
+<br><br><br><br>
+<h1 align="center" style="font-size:larger;"><b>Add Complaints</b></h1>
+<main class="w-screen h-full mt-6">
+    <div class="">
+      <div class="w-full h-60 bg-white items-center flex justify-center">
+        <form
+          method="POST"
+          action=""
+          class="drop-shadow items-center justify-center"
+        >
+         {% csrf_token %}
+         <div class="flex items-center justify-center">
+          <!-- Image on the left side -->
+          <img src="{% static './img/comp1.avif' %}" style="max-width: 100%; height: auto; max-height: 268px;" alt="Image" class="w-1/2 mr-4">
+        
+          <!-- Textarea and submit button on the right side -->
+          <div class="flex flex-col justify-center">
+            <textarea
+              required
+              autofocus
+              required
+              class="border p-3 outline-none mb-4"
+              name="compaint"
+              id=""
+              cols="60"
+              rows="5"
+              placeholder="Tell Us What is your complaint ?"
+            ></textarea>
+            <input
+              class="cursor-pointer hover:bg-gray-500/80 text-sm font-bold text-white bg-gray-500 rounded px-20 py-3"
+              type="submit"
+              value="SEND COMPLAINT"
+            />
+          </div>
+        </div>
+        
+          </div>
+        </form>
+      </div>
+    </div> 
+{% endblock content %}

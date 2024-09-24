@@ -1,0 +1,83 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<div class="w-full h-full bg-white rounded-lg">
+
+    <!-- TITLE -->
+
+    <div class="flex justify-between mx-12 pt-6">
+        <h3 class="font-bold bg-gray-200 px-4 rounded-lg py-1">
+            Volunteers
+        </h3>
+       <!--  <a href="{% url 'add-volunteer' %}" class="border border-stone-950 rounded-lg px-4 py-1  text-zinc-900 font-medium hover:bg-black hover:text-white">Add Volunteer</a> -->
+    </div>
+
+    <!-- TABLE STARTS -->
+   
+     
+    
+
+
+<table class="table w-full mt-4">
+    <!-- TABLE HEAD -->
+    <thead class="table-head bg-amber-500 h-14 ">
+        <tr class="bg-gray-400 ">
+            <th>#</th>
+            <th>Name</th>
+            <th>Contact Number</th>
+            <th>Location</th>
+            <th>State</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <!-- TABLE HEAD ENDS -->
+    
+    <!-- TABLE BODY -->
+    <tbody >
+        <!-- ITEM -->
+
+    {% for volunteer in volunteers %}
+
+        <tr class="odd:bg-gray-100 even:bg-white">
+            <!-- NAME -->
+            <th class="py-4"><p class="text-black font-semibold text-base">1</p></th>
+            <th class="py-4"><p class="text-black font-semibold text-base">{{volunteer.name}}</p></th>
+            <th class="py-4"><p class="text-black font-semibold text-base">{{volunteer.phone}}</p></th>
+            <th class="py-4"><p class="text-black font-semibold text-base">{{volunteer.location}}</p></th>
+            <th class="py-4"><p class="text-black font-semibold text-base">{{volunteer.state}}</p></th>
+            <th class="py-4">
+                <a href="{% url 'edit-volunteer' volunteer.id %}" class="border border-green-600 text-green-600 rounded-lg px-4 py-1 bg-red mr-4 text-sm font-semibold hover:bg-green-600  hover:text-white">Edit</a>
+                <a href="{% url 'delete-volunteer' volunteer.id %}" class=" border border-red-600  text-red-600 rounded-lg px-4 py-1 hover:bg-red-600 hover:text-white font-semibold text-sm">Delete</a>
+            </th>
+        </tr>
+
+        {% endfor %}
+      
+      
+       
+      
+       
+      
+      
+        
+        
+      
+        
+       
+       
+    </tbody>
+    <!-- TABLE BODY ENDS -->
+</table>
+
+
+    
+
+
+    
+</div>
+
+
+
+{% endblock content %}

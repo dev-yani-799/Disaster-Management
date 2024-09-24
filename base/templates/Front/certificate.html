@@ -1,0 +1,105 @@
+{% extends 'home.html' %} {% block content %}
+
+<div class="w-[900px] min-h-screen mx-auto mt-12">
+  <h1 class="font-bold opacity-80">Request For Certificates</h1>
+
+  <div
+    class="w-[900px] h-[300px] mx-auto mt-4 flex justify-between flex-wrap gap-8"
+  >
+    {% for nonNeed in nonNeeds %}
+    <div
+      class="w-[400px] h-[350px] rounded-lg drop-shadow-lg bg-white p-8 text-center"
+    >
+      <h1 class="font-medium opacity-80 mt-4">
+        State Committee: {{nonNeed.state_committee}}
+      </h1>
+      <h1 class="font-medium opacity-80 mt-4">Date : {{nonNeed.created}}</h1>
+      <h1 class="font-medium opacity-80 mt-4">
+        Requirements : {{nonNeed.requirements}}
+      </h1>
+      <form
+        action="{% url 'submit-certificate' nonNeed.id %}"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        {% csrf_token %}
+
+        <input
+          type="number"
+          required
+          name="amount"
+          placeholder="Enter Amount"
+          class="border drop-shadow-lg p-2 outline-none mt-4"
+        /><br /><br />
+        <label for="estimate" class="font-bold opacity-60">Estimate</label>
+
+        <input
+          type="file"
+          required
+          class="bg-white rounded border-none font-semibold outline-none w-[100px]"
+          required
+          name="estimate"
+          placeholder="Estimate"
+        /><br /><br />
+
+        <input
+          type="submit"
+          value="Submit"
+          class="bg-gray-500 mt-2 text-white font-bold px-6 py-1 cursor-pointer rounded-lg hover:bg-gray-500/90"
+        />
+      </form>
+    </div>
+
+    {% endfor %}
+  </div>
+
+  <h1 class="font-bold opacity-80 mt-16">Your Certificates</h1>
+
+  <div
+    class="w-[900px] h-[300px] mx-auto mt-4 flex justify-between flex-wrap gap-8"
+  >
+    {% for certicicate in certificates %}
+    <div
+      class="w-[400px] h-[300px] rounded-lg drop-shadow-lg bg-white p-8 text-center"
+    >
+      <h1 class="font-medium opacity-80 mt-4">
+        State Committee: {{certicicate.volunteer.state}}
+      </h1>
+      <h1 class="font-medium opacity-80 mt-4">
+        Date : {{certicicate.created}}
+      </h1>
+      <h1 class="font-medium opacity-80 mt-4">
+        Requirements : {{certicicate.need}}
+      </h1>
+      <div>
+        {% if certicicate.status == 0 %}
+
+        <input
+          type="button"
+          value="Pending"
+          class="border mt-16 border-gray-500 text-gray-500 font-bold px-6 py-1 cursor-pointer rounded-lg"
+        />
+        {% elif certicicate.status == 1 %}
+        <br />
+        <br />
+        <br />
+        <a
+          href="{% url 'user-certificate-view' certicicate.id %}"
+          class="border mt-12 border-green-500 text-green-500 font-bold px-6 py-1 cursor-pointer rounded-lg"
+          >View Certificate</a
+        >
+        {% else %}
+        <input
+          type="button"
+          value="Rejected"
+          class="border mt-16 border-red-500 text-red-500 font-bold px-6 py-1 cursor-pointer rounded-lg"
+        />
+        {% endif %}
+      </div>
+    </div>
+
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock content %}

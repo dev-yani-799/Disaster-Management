@@ -1,0 +1,16 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="w-[876px] relative h-[621px]  mx-auto bg-white rounded drop-shadow-sm">
+    <img class="h-[90%] mx-auto " src="{% static 'img/certificate.jpg' %}" alt="">
+    <h1 class="absolute text-xl font-bold right-[38%] top-[170px]">{{certificate.volunteer.state}} State Committee</h1>
+    <h1 class="absolute text-4xl font-bold right-[38%] top-[280px]">{{certificate.volunteer.name}}</h1>
+    <h1 class="absolute font-bold left-[20%] bottom-[34%]">{{certificate.updated}}</h1>
+    <h1 class="absolute font-bold text-xl p-4 ml-6">Amount : ₹ {{certificate.amount}}</h1>
+    
+</div>
+
+
+{% endblock content %}

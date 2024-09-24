@@ -1,0 +1,108 @@
+{% extends 'index.html' %} {% block content %}
+
+<div class="w-full h-full bg-white rounded-lg">
+  <!-- TITLE -->
+
+  <div class="flex justify-between mx-12 mt-4 pt-6">
+    <h3 class="font-bold bg-gray-200 px-4 rounded-lg py-1 ml-48">Add User</h3>
+  </div>
+
+  <!-- TABLE STARTS -->
+
+  {% for message in messages %}
+
+  <h4 class="text-red-600 font-semibold ml-60 mt-4 text-xs">{{message}}</h4>
+
+  {% endfor %}
+
+  <div class="table w-full mt-4">
+    <form
+    onsubmit="return validate()"
+      class="w-full flex flex-wrap gap-4 justify-center mt-10"
+      method="POST"
+      action=""
+    >
+      {% csrf_token %}
+      <input
+        class="border rounded-lg w-[500px] h-12 outline-none px-4 mb-12 drop-shadow border']"
+        required
+        name="name"
+        type="text"
+        placeholder="Name"
+      />
+      <input
+        class="border rounded-lg w-[500px] h-12 outline-none px-4 mb-12 drop-shadow border']"
+        required
+        id='phonenumber'
+        name="number"
+        type="number"
+        placeholder="Contact Number"
+      />
+
+      <select
+      required
+        name="state"
+        class="border opacity-50 px-4 w-[500px] h-12 outline-none drop-shadow border rounded-lg"
+        id="state"
+      >
+        <option disabled selected value="0">select state</option>
+        {% for state in states %}
+        <option class="" value="{{state.id}}">{{state.name}}</option>
+        {% endfor %}
+      </select>
+
+      <!-- <input class="border rounded-lg w-[500px] h-12 outline-none px-4 mb-12 drop-shadow border']" required name="state" type="text" placeholder="State"> -->
+      <input
+        class="border rounded-lg w-[500px] h-12 outline-none px-4 mb-12 drop-shadow border']"
+        required
+        name="email"
+        type="email"
+        placeholder="Email"
+      />
+      <input
+        class="border rounded-lg w-[500px] h-12 outline-none px-4 mb-12 drop-shadow border']"
+        required
+        name="location"
+        type="text"
+        placeholder="Location"
+      />
+      <input
+        class="border rounded-lg w-[500px] h-12 outline-none px-4 mb-12 drop-shadow border']"
+        required
+        name="password"
+        type="password"
+        id="password"
+        placeholder="Password"
+      />
+      <input
+        class="border rounded-lg w-[500px] h-10 outline-none px-4 bg-gray-600 text-white font-medium cursor-pointer hover:bg-gray-600/80"
+        type="submit"
+        value="Add"
+      />
+    </form>
+  </div>
+</div>
+
+
+
+<script>
+     
+    
+    function validate(){
+      let phone = document.getElementById('phonenumber').value
+      let password = document.getElementById('password').value
+  
+          if(phone.length<10){
+              alert('Enter Valid Phone Number')
+              return false
+          }
+          if(password.length<6){
+              alert('Password Should be 6 characters minimum')
+              return false
+          }
+  
+          return true
+    } 
+  </script>
+
+{% endblock content %}

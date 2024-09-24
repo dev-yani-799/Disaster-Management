@@ -1,0 +1,126 @@
+{% extends 'index.html' %} {% block content %}
+
+<div class="w-full h-full bg-white rounded-lg">
+  <!-- TITLE -->
+
+  <div class="flex justify-between mx-12 mt-4 pt-6">
+    <h3 class="font-bold bg-gray-200 px-4 rounded-lg py-1 ml-48">
+      Add State Committee
+    </h3>
+    <!-- <a href="#" class="border border-stone-950 rounded-lg px-4 py-1 dropshadow text-zinc-900 font-medium hover:bg-black hover:text-white">Add Volunteer</a> -->
+  </div>
+
+  <!-- TABLE STARTS -->
+
+  {% for message in messages %}
+
+  <h4 class="text-red-600 font-semibold ml-60 mt-4 text-xs">{{message}}</h4>
+
+  {% endfor %}
+
+  <div class="table w-full mt-2">
+    <form
+
+      onsubmit="return validate()"
+      class="w-full flex flex-wrap gap-4 justify-center mt-4"
+      method="POST"
+      action="/createstate"
+    >
+      {% csrf_token %}
+
+      <input
+        required
+        class="border rounded-lg w-[500px] h-12 outline-none px-4 mb-12 drop-shadow border']"
+        name="name"
+        type="text"
+        placeholder="State committee Name"
+      />
+      <input
+        required
+        class="border rounded-lg w-[500px] h-12 outline-none px-4 mb-12 drop-shadow border']"
+        name="number"
+        type="number"
+        id='phonenumber'
+        placeholder="Contact Number"
+      />
+      <input required type="hidden" name="latitude" id="lat" value="" />
+      <input required type="hidden" name="longitude" id="lng" value="" />
+      <select
+      required
+        name="state"
+        class="border opacity-50 px-4 w-[500px] h-12 outline-none drop-shadow border rounded-lg"
+        id="state"
+      >
+        <option disabled selected value="0">select state</option>
+        {% for state in states %}
+        <option value="{{state.id}}">{{state.name}}</option>
+        {% endfor %}
+      </select>
+
+      <!-- <input required class="border rounded-lg w-[500px] h-12 outline-none px-4 mb-12 drop-shadow border']" name="state" type="text" placeholder="State"> -->
+      <input
+        required
+        class="border rounded-lg w-[500px] h-12 outline-none px-4 mb-12 drop-shadow border']"
+        name="email"
+        type="email"
+        placeholder="Email"
+      />
+      <input
+        required
+        class="border rounded-lg w-[500px] h-12 outline-none px-4 mb-12 drop-shadow border']"
+        name="location"
+        type="text"
+        placeholder="Location"
+      />
+      <input
+        required
+        class="border rounded-lg w-[500px] h-12 outline-none px-4 mb-12 drop-shadow border']"
+        name="password"
+        type="password"
+        id="password"
+        placeholder="Password"
+      />
+      <input 
+        class="border rounded-lg w-[500px] h-10 outline-none px-4 bg-gray-600 text-white font-medium cursor-pointer hover:bg-gray-600/80"
+        type="submit"
+        value="Add"
+      />
+    </form>
+  </div>
+</div>
+
+<script>
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+      x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+  }
+
+  function showPosition(position) {
+    lat = document.getElementById("lat");
+    lng = document.getElementById("lng");
+    lat.value = position.coords.latitude;
+    lng.value = position.coords.longitude;
+  }
+  
+  function validate(){
+    let phone = document.getElementById('phonenumber').value
+    let password = document.getElementById('password').value
+
+        if(phone.length<10){
+            alert('Enter Valid Phone Number')
+            return false
+        }
+        if(password.length<6){
+            alert('Password Should be 6 characters minimum')
+            return false
+        }
+
+        return true
+  }
+  getLocation();
+</script>
+
+{% endblock content %}

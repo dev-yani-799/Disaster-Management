@@ -1,0 +1,795 @@
+{% extends 'home.html' %}
+
+{% load static %}
+{% block content %}
+{% comment %} <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> {% endcomment %}
+
+
+
+
+
+
+{% comment %} <style>
+    body {
+        font-size: large;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden; /* Hide horizontal scrollbar */
+      }
+  
+      /* Custom styles for carousel */
+      .carousel {
+    
+        width: 100vw; /* Set the width to 100% of viewport width */
+        max-width: 130%; /* Ensure the carousel does not exceed the viewport width */
+        margin: auto; /* Center the carousel horizontally */
+      }
+    
+      .carousel-inner {
+        height: 400px; /* Set the desired height */
+      }
+    
+      .carousel-inner .item img {
+        height: 100%; /* Make the images fill the carousel height */
+      }
+      /* Global styles */
+      .containers {
+        display: flex;
+        margin-left: 20px;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh; /* Set minimum height to viewport height */
+      }
+  
+      .dis {
+        max-width: 40%;
+        height: auto;
+        border-radius: 10px;
+        margin-right: 20px;
+      }
+  
+      .content {
+        max-width: 50%;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+  
+      @media (max-width: 768px) {
+        .containers {
+          flex-direction: column;
+          text-align: center;
+        }
+  
+        .containers img {
+          max-width: 100%;
+          margin-bottom: 20px;
+        }
+  
+        .content {
+          max-width: 100%;
+        }
+      }
+     
+table {
+    margin-left: 30px;
+    width: 50%;
+    height: 40%; /* Adjusted to 100% for responsiveness */
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #333;
+    color: #fff;
+  }
+  
+  tbody tr:hover {
+    background-color: #f2f2f2;
+  }
+  </style> {% endcomment %}
+  
+  {% comment %} <div class="container" style="margin: 0;padding:0; ">
+  
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+      </ol>
+  
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">
+        <div class="item active">
+          <img src="{% static "./img/img1.jpg" %}" alt="Los Angeles" style="width:100%;">
+        </div>
+  
+        <div class="item">
+          <img src="{% static "./img/img2.jpeg" %}" alt="Chicago" style="width:100%;">
+        </div>
+      
+        <div class="item">
+          <img src="{% static "./img/img5.jpg" %}" alt="New york" style="width:100%;">
+        </div>
+      </div>
+  
+      <!-- Left and right controls -->
+      <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </div>
+  <div class="containers" style="position: relative;height:100vh;">
+    <div class="content">
+      <h1 style="font-family: 'Times New Roman', Times, serif;font-size:22px;font-weight:bolder;">Disasters Occurring Around the World</h1>
+      <p style="font-family: 'Times New Roman', Times, serif;font-size:20px;color:black">
+        In today's interconnected world, disasters occurring around the globe have a profound impact on communities, economies, and ecosystems. From natural calamities like earthquakes, hurricanes, and wildfires to human-made disasters such as industrial accidents and conflicts, the breadth and diversity of these events underscore the urgent need for global cooperation and preparedness. Increasingly, climate change is exacerbating the frequency and intensity of disasters, highlighting the importance of sustainable practices and resilience-building measures. Efforts in disaster risk reduction, early warning systems, and rapid response capabilities are crucial in mitigating the devastating effects of these events and safeguarding lives and livelihoods worldwide. Collaborative action, innovative solutions, and community engagement are key pillars in navigating the complex landscape of disasters and fostering a more resilient and sustainable future for all.
+      </p>
+     
+    </div>
+    <img src="{% static "./img/img6.webp" %}" alt="Disaster Image" class="dis">
+  </div>
+<div style="margin: 50px; position:absolute;top:1105px;">
+  <h1 style="text-align:left;">Disaster Table</h1>
+    <table >
+        <thead>
+            <tr>
+                <th>Disaster</th>
+                <th>Damage</th>
+                <th>How to Act</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Earthquake</td>
+                <td>Structural damage, injuries, loss of life</td>
+                <td>Drop, cover, and hold on. Move to a safe location away from buildings and hazards after shaking stops.</td>
+            </tr>
+            <tr>
+                <td>Hurricane</td>
+                <td>Wind damage, flooding</td>
+                <td>Evacuate if advised. Secure loose objects, board up windows, and stay indoors during the storm.</td>
+            </tr>
+            <tr>
+                <td>Flood</td>
+                <td>Property damage, loss of life</td>
+                <td>Move to higher ground, avoid flooded areas, and listen to local authorities for evacuation orders.</td>
+            </tr>
+            <tr>
+                <td>Tornado</td>
+                <td>Wind damage, structural damage, injuries, loss of life</td>
+                <td>Seek shelter in a sturdy building, preferably in a basement or interior room. Stay away from windows.</td>
+            </tr>
+            {% comment %} <tr>
+                <td>Wildfire</td>
+                <td>Property damage, loss of life</td>
+                <td>Evacuate if advised. Clear flammable vegetation around your property. Stay informed about fire conditions.</td>
+            </tr>
+            <tr>
+                <td>Volcanic Eruption</td>
+                <td>Ashfall, pyroclastic flows, lahars, respiratory issues</td>
+                <td>Follow evacuation orders if issued. Stay indoors during ashfall. Wear masks to protect against ash inhalation.</td>
+            </tr>
+            <tr>
+                <td>Tsunami</td>
+                <td>Flooding, destruction of coastal areas, loss of life</td>
+                <td>Move to higher ground immediately if near the coast. Follow evacuation routes and instructions from authorities.</td>
+            </tr>
+            <tr>
+                <td>Drought</td>
+                <td>Water scarcity, crop failure, famine</td>
+                <td>Conserve water, limit outdoor activities, and support drought relief efforts.</td>
+            </tr> {% endcomment %}
+            {% comment %} <tr>
+                <td>Heatwave</td>
+                <td>Heat-related illnesses, dehydration, power outages</td>
+                <td>Stay hydrated, stay indoors in air-conditioned spaces, and check on vulnerable individuals.</td>
+            </tr>
+            <tr>
+                <td>Blizzard</td>
+                <td>Heavy snowfall, low visibility, frostbite, hypothermia</td>
+                <td>Stay indoors, dress warmly, and avoid travel if possible. Keep emergency supplies on hand.</td>
+            </tr>
+            <tr>
+                <td>Cyclone</td>
+                <td>High winds, storm surge, flooding, structural damage</td>
+                <td>Follow evacuation orders if issued. Secure property and belongings. Stay indoors during the storm.</td>
+            </tr>
+            <tr>
+                <td>Heatwave</td>
+                <td>Heat-related illnesses, dehydration</td>
+                <td>Stay hydrated, stay indoors in cool places, and avoid strenuous outdoor activities during peak heat hours.</td>
+            </tr>
+            <tr> {% endcomment %}
+                {% comment %} <td>Floods</td>
+                <td>Waterlogging, damage to property, loss of life</td>
+                <td>Move to higher ground if in a flood-prone area. Avoid walking or driving through flooded areas. Follow evacuation orders.</td>
+            </tr>
+            <tr>
+                <td>Landslides</td>
+                <td>Structural damage, road blockages, loss of life</td>
+                <td>Stay away from steep slopes during heavy rainfall. Follow local authorities' instructions.</td>
+            </tr>
+            <tr>
+                <td>Cold Wave</td>
+                <td>Extreme cold, frostbite, hypothermia</td>
+                <td>Dress in warm layers, stay indoors as much as possible, and check on vulnerable individuals such as the elderly.</td>
+            </tr>
+            <tr>
+                <td>Cyclonic Storm</td>
+                <td>High winds, heavy rain, flooding, storm surges</td>
+                <td>Follow evacuation orders if issued. Stay indoors during the storm. Secure loose objects.</td>
+            </tr> 
+            <!-- Add more rows for other disasters -->
+        </tbody>
+    </table>
+</div> {% endcomment %}
+
+<head>
+  <meta charset="utf-8">
+  <title>Landing Zero Free Bootstrap Theme with Video</title>
+  <meta name="description" content="This is a free Bootstrap landing page theme created for BootstrapZero. Feature video background and one page design." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="Codeply">
+  <link rel="stylesheet" href="{% static "assets/css/bootstrap.min.css" %}" />
+  <link rel="stylesheet" href="{% static "assets/css/animate.min.css" %}" />
+  <link rel="stylesheet" href="{% static "assets/css/ionicons.min.css" %}" />
+  <link rel="stylesheet" href="{% static "assets/css/styles.css" %}" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css">
+  {% comment %} <style>
+    header {
+      position: relative;
+      height: 100vh; /* Adjust this value as needed */
+      background-color: #f8f9fa;
+      color: #333;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+   
+
+    .header-content h1 {
+   
+      margin-bottom: 20px;
+    }
+
+    .header-content h4 {
+      font-size: 1.5rem;
+      margin-bottom: 30px;
+    }
+
+    .btn-xl {
+      padding: 15px 30px;
+    
+    }
+
+    #video-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%;
+      height: 50%;
+      object-fit: cover;
+      z-index: -1;
+      opacity: 0.5; /* Adjust the opacity as desired */
+    }
+
+    @media (max-width: 768px) {
+      header {
+        height: 50vh; /* Adjust this value for smaller screens */
+      }
+
+      
+
+     
+
+      
+    }
+  </style> {% endcomment %}
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+      *{
+    font-family: "Times New Roman", Times, serif; 
+  }
+    .carousel {
+        width: 120%; /* Increase the width as needed */
+        margin: auto; /* Center the carousel horizontally */
+      }
+      
+      .carousel-inner {
+        height: 400px; /* Set the desired height */
+      }
+      
+      .carousel-inner .item img {
+        height: 100%; /* Make the images fill the carousel height */
+      }
+      
+      table {
+        margin-left: 30px;
+        width: 50%;
+        height: 40%; /* Adjusted to 100% for responsiveness */
+        border-collapse: collapse;
+        margin: 20px 0;
+        background-color: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      
+      th, td {
+        color:black;
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+      
+      th {
+        background-color: #333;
+        color: #fff;
+      }
+      
+      tbody tr:hover {
+        background-color: #f2f2f2;
+      }
+      .video-container {
+        width: 100%;
+        height: 700px;
+        overflow: hidden;
+      
+        /* Hide video controls */
+        video::-webkit-media-controls,
+        video::-webkit-media-controls-play-button,
+        video::-webkit-media-controls-start-playback-button {
+          display: none !important;
+          -webkit-appearance: none;
+        }
+      }
+      
+    
+      .video-container video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Ensures the video covers the container */
+      }
+      
+  </style>
+</head>
+
+ {% comment %} <video controls id="video-background">
+  <source src="}" type="video/mp4">
+  Your browser does not support the video tag. Please upgrade your browser.
+</video>  {% endcomment %}
+{% comment %} <div class="container" style="margin: 0; padding: 0; overflow: hidden; position: absolute; top: 70px;left:100px; width: 200vw !important;">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+      </ol>
+  
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">
+        <div class="item active">
+          <img src="{% static "./img/img1.jpg" %}" alt="Los Angeles" style="width:100%; height:400px;">
+        </div>
+        <div class="item">
+          <img src="{% static "./img/img2.jpeg" %}" alt="Chicago" style="width:100%; height:400px;">
+        </div>
+        <div class="item">
+          <img src="{% static "./img/img5.jpg" %}" alt="New York" style="width:100%; height:400px;">
+        </div>
+      </div>
+  
+      <!-- Left and right controls -->
+      <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+</div> {% endcomment %}
+
+<div class="video-container">
+  <video autoplay muted playsinline>
+    <source src="" type="video/mp4">
+  </video>
+</div>
+
+  {% comment %} <iframe style="width:21498px; height:500px;" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> {% endcomment %}
+
+  
+
+
+  <!-- Initialize Carousel -->
+  <script>
+    $(document).ready(function() {
+      $('#myCarousel').carousel();
+    });
+  </script>
+
+  
+
+  
+<section id="two"style="position:relative;">
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 class="margin-top-0 text-primary">Disaster-Resilient</h2>
+
+              <hr class="primary">
+          </div>
+      </div>
+  </div>
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-4 col-md-4 text-center">
+            <div class="feature">
+                <i class="fa-solid fa-circle-exclamation icon-lg" data-wow-delay=".3s"></i>
+                <h3>Disaster Preparedness</h3>
+                <p class="text-muted">Stay informed and be prepared for unexpected disasters</p>
+            </div>
+            
+          </div>
+          <div class="col-lg-4 col-md-4 text-center">
+            <div class="feature">
+                <i class="fa-solid fa-truck-medical icon-lg"></i>
+                <h3>Emergency Response</h3>
+                <p class="text-muted">Swift and effective response during disasters</p>
+            </div>
+        </div>
+          <div class="col-lg-4 col-md-4 text-center">
+            <div class="feature">
+                <i class="fa-solid fa-exclamation-triangle icon-lg"></i>
+                <h3>Emergency Preparedness</h3>
+                <p class="text-muted">Stay alert and be prepared for potential disasters</p>
+            </div>
+        </div>
+        
+        
+      
+        
+      </div>
+  </div>
+</section>
+<section id="three" class="no-padding">
+  <div class="container-fluid">
+      <div class="row no-gutter">
+          <div class="col-lg-4 col-sm-6">
+              <a href="#galleryModal" class="gallery-box" data-toggle="modal" data-src="{% static './img/deer.jpg' %}">
+                  <img src="{% static './img/deer.jpg' %}" class="img-responsive" alt="Image 1">
+                  <div class="gallery-box-caption">
+                      <div class="gallery-box-content">
+                          <div>
+                              <i class="icon-lg ion-ios-search"></i>
+                          </div>
+                      </div>
+                  </div>
+              </a>
+          </div>
+          <div class="col-lg-4 col-sm-6">
+              <a href="#galleryModal" class="gallery-box" data-toggle="modal" data-src="{% static './img/city.jpg' %}">
+                  <img src="{% static './img/beach.jpg' %}" class="img-responsive" alt="Image 2">
+                  <div class="gallery-box-caption">
+                      <div class="gallery-box-content">
+                          <div>
+                              <i class="icon-lg ion-ios-search"></i>
+                          </div>
+                      </div>
+                  </div>
+              </a>
+          </div>
+  <div class="clearfix hidden-lg"> </div>
+          <div class="col-lg-4 col-sm-6">
+              <a href="#galleryModal" class="gallery-box" data-toggle="modal" data-src="{% static './img/lake.jpg' %}">
+                  <img src="{% static './img/lake.jpg' %}" class="img-responsive" alt="Image 3">
+                  <div class="gallery-box-caption">
+                      <div class="gallery-box-content">
+                          <div>
+                              <i class="icon-lg ion-ios-search"></i>
+                          </div>
+                      </div>
+                  </div>
+              </a>
+          </div>
+          <div class="col-lg-4 col-sm-6">
+              <a href="#galleryModal" class="gallery-box" data-toggle="modal" data-src="{% static './img/bike.jpg' %}">
+                  <img src="{% static './img/bike.jpg' %}" class="img-responsive" alt="Image 4">
+                  <div class="gallery-box-caption">
+                      <div class="gallery-box-content">
+                          <div>
+                              <i class="icon-lg ion-ios-search"></i>
+                          </div>
+                      </div>
+                  </div>
+              </a>
+          </div>
+  <div class="clearfix hidden-lg"> </div>
+          <div class="col-lg-4 col-sm-6">
+              <a href="#galleryModal" class="gallery-box" data-toggle="modal" data-src="{% static './img/beach.jpg' %}">
+                  <img src="{% static './img/city.jpg' %}" class="img-responsive" alt="Image 5">
+                  <div class="gallery-box-caption">
+                      <div class="gallery-box-content">
+                          <div>
+                              <i class="icon-lg ion-ios-search"></i>
+                          </div>
+                      </div>
+                  </div>
+              </a>
+          </div>
+          <div class="col-lg-4 col-sm-6">
+              <a href="#galleryModal" class="gallery-box" data-toggle="modal" data-src="{% static './img/colors.jpg' %}">
+                  <img src="{% static './img/colors.jpg' %}" class="img-responsive" alt="Image 6">
+                  <div class="gallery-box-caption">
+                      <div class="gallery-box-content">
+                          <div>
+                              <i class="icon-lg ion-ios-search"></i>
+                          </div>
+                      </div>
+                  </div>
+              </a>
+          </div>
+      </div>
+  </div>
+</section>
+<section class="container-fluid" id="four">
+    <div class="row">
+      <!-- Video on the left side -->
+      <div class="col-xs-12 col-sm-6">
+        {% comment %} <h2 class="text-center text-primary" style="text-alighn:center; ">Features</h2> {% endcomment %}
+        <hr>
+        <iframe style="width: 100%; height: 400px;" src="https://www.youtube.com/embed/Aiw6Z55DVPA?si=HytdydDYa8U07mfc&autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+  
+      <!-- Paragraph content on the right side -->
+      <div class="col-xs-12 col-sm-6" style="overflow: hidden;">
+        <div class="container">
+          {% comment %} <h3 class="text-center text-primary" style="text-align:center; position:absolute;left:300px;">Disaster Management</h3> {% endcomment %}
+          <p>
+            In 2022, the Emergency Event Database EM-DAT recorded 387 natural hazards and disasters worldwide, resulting in the loss of 30,704 lives and affecting 185 million individuals. Economic losses totaled around US$ 223.8 billion. Heat waves caused over 16,000 excess deaths in Europe, while droughts affected 88.9 million people in Africa. Hurricane Ian single-handedly caused damage costing US $ 100 billion in the Americas. The human and economic impact of disasters was relatively higher in Africa, e.g., with 16.4 % of the share of deaths compared to 3.8 % in the previous two decades. It was relatively lower in Asia despite Asia experiencing some of the most destructive disasters in 2022.
+            The total of 387 catastrophic events in 2022 is slightly higher than the average from 2002 to 2021 (370). The occurrence of each type of disaster was also close to the average levels in the last two decades.
+
+            In 2022, the total death toll of 30,704 was three times higher than in 2021 but below the 2002-2021 average of 60,955 deaths, the latter being influenced by a few mega-disasters, such as the 2010 Haiti earthquake (222,570 deaths). For a more useful comparison, the 2022 toll is almost twice the 2002-2021 median of 16,011 deaths.
+            
+            The impact of heat waves on the elderly is a statistic that is increasingly documented and reflected in EM-DAT’s figures. Accordingly, heatwave-related excess mortality in Europe, with a provisional estimate of 16,305 deaths, accounted for over half of the total death toll in 2022. There were at least five record-breaking heat waves in Europe in 2022, with summer temperatures reaching 47°C.
+            
+            The drought-induced famine in Uganda caused 2,465 deaths, making it the second deadliest disaster event in 2022 after the European heat waves. In addition, droughts impacted 88.9 million people in six African countries (the Democratic Republic of the Congo, Ethiopia, Nigeria, Sudan, Niger, and Burkina Faso) in 2022. Notable drought events also occurred in China (where 6.1 M people were affected, costing damage worth US$ 7.6 B), in the USA (US$ 22 B), and in Brazil (US$ 4 B).
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  <aside class="bg-dark">
+    <div class="container text-center">
+        <div class="call-to-action">
+            <h2 class="text-primary">Disaster Preparedness</h2>
+            <p>Get ready for emergencies with these resources:</p>
+            <a href="https://www.ready.gov/" target="_blank" class="btn btn-default btn-lg wow flipInX">Learn More</a>
+        </div>
+        <br>
+        <hr/>
+        <br>
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+                <div class="row">
+                    <h6 class="wide-space text-center">Resources and Guidelines for Disaster Response</h6>
+
+                    <div class="col-sm-3 col-xs-6 text-center">
+                        <i class="icon-lg ion-ios-medkit-outline" title="First Aid"></i>
+                    </div>
+                    <div class="col-sm-3 col-xs-6 text-center">
+                        <i class="icon-lg ion-ios-location-outline" title="Emergency Plan"></i>
+                    </div>
+                    <div class="col-sm-3 col-xs-6 text-center">
+                        <i class="icon-lg ion-ios-telephone-outline" title="Emergency Contacts"></i>
+                    </div>
+                    <div class="col-sm-3 col-xs-6 text-center">
+                        <i class="icon-lg ion-ios-alert-outline" title="Alert Notifications"></i>
+                    </div>
+                    <!-- Additional icon -->
+                    <div class="col-sm-3 col-xs-6 text-center">
+                        <i class="icon-lg ion-ios-people-outline" title="Community Support"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </aside>
+  
+  
+<section id="last">
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 text-center">
+            <h3 style="color:#9c27b0;">Disaster Preparedness and Response Guidelines</h3>
+              <hr class="primary">
+              <p>Here are some important guidelines to follow in case of various disasters:</p>
+          </div>
+          <div class="col-lg-10 col-lg-offset-1 text-center">
+            <table style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th>Disaster</th>
+                        <th>Damage</th>
+                        <th>How to Act</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Earthquake</td>
+                        <td>Structural damage, injuries, loss of life</td>
+                        <td>Drop, cover, and hold on. Move to a safe location away from buildings and hazards after shaking stops.</td>
+                    </tr>
+                    <tr>
+                        <td>Hurricane</td>
+                        <td>Wind damage, flooding</td>
+                        <td>Evacuate if advised. Secure loose objects, board up windows, and stay indoors during the storm.</td>
+                    </tr>
+                    <tr>
+                        <td>Flood</td>
+                        <td>Property damage, loss of life</td>
+                        <td>Move to higher ground, avoid flooded areas, and listen to local authorities for evacuation orders.</td>
+                    </tr>
+                    <tr>
+                        <td>Tornado</td>
+                        <td>Wind damage, structural damage, injuries, loss of life</td>
+                        <td>Seek shelter in a sturdy building, preferably in a basement or interior room. Stay away from windows.</td>
+                    </tr>
+                    <tr>
+                        <td>Wildfire</td>
+                        <td>Property damage, loss of life</td>
+                        <td>Evacuate if advised. Clear flammable vegetation around your property. Stay informed about fire conditions.</td>
+                    </tr>
+                    <tr>
+                        <td>Volcanic Eruption</td>
+                        <td>Ashfall, pyroclastic flows, lahars, respiratory issues</td>
+                        <td>Follow evacuation orders if issued. Stay indoors during ashfall. Wear masks to protect against ash inhalation.</td>
+                    </tr>
+                    <tr>
+                        <td>Tsunami</td>
+                        <td>Flooding, destruction of coastal areas, loss of life</td>
+                        <td>Move to higher ground immediately if near the coast. Follow evacuation routes and instructions from authorities.</td>
+                    </tr>
+                  
+                    <!-- Add more rows for other disasters -->
+                </tbody>
+            </table>
+          </div>
+      </div>
+  </div>
+</section>
+<footer id="footer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-6 col-sm-3 column">
+                <h4>Disaster Information</h4>
+                <ul class="list-unstyled">
+                    <li><a href="#">Emergency Products</a></li>
+                    <li><a href="#">Crisis Services</a></li>
+                    <li><a href="#">Disaster Relief Benefits</a></li>
+                    <li><a href="#">Emergency Developers</a></li>
+                </ul>
+            </div>
+            <div class="col-xs-6 col-sm-3 column">
+                <h4>Disaster Management</h4>
+                <ul class="list-unstyled">
+                    <li><a href="#">Contact Emergency Services</a></li>
+                    <li><a href="#">Emergency Delivery Information</a></li>
+                    <li><a href="#">Emergency Privacy Policy</a></li>
+                    <li><a href="#">Emergency Terms &amp; Conditions</a></li>
+                </ul>
+            </div>
+            <div class="col-xs-12 col-sm-3 column">
+                <h4>Stay Prepared</h4>
+                <form>
+                    <div class="form-group">
+                      <input type="email" class="form-control" title="Stay informed, stay safe!" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                      <button class="btn btn-primary" data-toggle="modal" data-target="#alertModal" type="button">Subscribe for alerts</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-xs-12 col-sm-3 text-right">
+                <h4>Connect</h4>
+                <ul class="list-inline">
+                  <li><a rel="nofollow" href="#" title="Twitter"><i class="icon-lg ion-social-twitter-outline"></i></a>&nbsp;</li>
+                  <li><a rel="nofollow" href="#" title="Facebook"><i class="icon-lg ion-social-facebook-outline"></i></a>&nbsp;</li>
+                  <li><a rel="nofollow" href="#" title="Dribble"><i class="icon-lg ion-social-dribbble-outline"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <br/>
+        <span class="pull-right text-muted small"><a href="http://www.bootstrapzero.com">Landing Zero by BootstrapZero</a> ©2024 Company</span>
+    </div>
+  </footer>
+  
+<div id="galleryModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div class="modal-body">
+      <img src="" id="galleryImage" class="img-responsive" />
+      <p>
+          <br/>
+          <button class="btn btn-primary btn-lg center-block" data-dismiss="modal" aria-hidden="true">Close <i class="ion-android-close"></i></button>
+      </p>
+    </div>
+  </div>
+  </div>
+</div>
+<div id="aboutModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-body">
+      <h2 class="text-center">Landing Zero Theme</h2>
+      <h5 class="text-center">
+          A free, responsive landing page theme built by BootstrapZero.
+      </h5>
+      <p class="text-justify">
+          This is a single-page Bootstrap template with a sleek dark/grey color scheme, accent color and smooth scrolling.
+          There are vertical content sections with subtle animations that are activated when scrolled into view using the jQuery WOW plugin. There is also a gallery with modals
+          that work nicely to showcase your work portfolio. Other features include a contact form, email subscribe form, multi-column footer. Uses Questrial Google Font and Ionicons.
+      </p>
+      <p class="text-center"><a href="http://www.bootstrapzero.com">Download at BootstrapZero</a></p>
+      <br/>
+      <button class="btn btn-primary btn-lg center-block" data-dismiss="modal" aria-hidden="true"> OK </button>
+    </div>
+  </div>
+  </div>
+</div>
+<div id="alertModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+  <div class="modal-content">
+    <div class="modal-body">
+      <h2 class="text-center">Nice Job!</h2>
+      <p class="text-center">You clicked the button, but it doesn't actually go anywhere because this is only a demo.</p>
+      <p class="text-center"><a href="http://www.bootstrapzero.com">Learn more at BootstrapZero</a></p>
+      <br/>
+      <button class="btn btn-primary btn-lg center-block" data-dismiss="modal" aria-hidden="true">OK <i class="ion-android-close"></i></button>
+    </div>
+  </div>
+  </div>
+</div>
+<!--scripts loaded here -->
+<script src="{% static 'asset/js/jquery.min.js' %}"></script>
+<script src="{% static 'asset/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'asset/js/jquery.easing.min.js' %}"></script>
+<script src="{% static 'asset/js/wow.js' %}"></script>
+<script src="{% static 'asset/js/wow.js' %}"></script>
+
+
+
+
+
+
+
+
+
+{% endblock content %}

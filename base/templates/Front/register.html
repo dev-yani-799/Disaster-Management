@@ -1,0 +1,145 @@
+{% extends 'home.html' %} {% block content %}
+<div class="w-[800px] mx-auto bg-white p-8 mt-8">
+  <h1 class="text-center font-bold tracking-widest text-xl">
+    VOLUNTEER REGISTER
+  </h1>
+  {% for message in messages %}
+  <p class="text-xs ml-[120px] text-red-500">{{ message }}</p>
+  {% endfor %}
+  <form
+    onsubmit="return validateForm()"
+    class="w-full flex flex-wrap gap-4 justify-center mt-10"
+    method="POST"
+    action=""
+  >
+    {% csrf_token %}
+    <input
+      class="border rounded-lg w-[500px] h-12 outline-none px-4 mb-2 drop-shadow border']"
+      name="name"
+      type="text"
+      placeholder="Name"
+      required
+    />
+    <input
+      class="border rounded-lg w-[500px] h-12 outline-none px-4 mb-2 drop-shadow border']"
+      name="number"
+      type="number"
+      id="phonenumber"
+      required
+      placeholder="Contact Number"
+    />
+    <div class="border rounded-lg drop-shadow h-12">
+      <input type="hidden" name="latitude" id="lat" value="" />
+      <input type="hidden" name="longitude" id="lng" value="" />
+      <input type="hidden" name="usertype" value="2" />
+      <select
+        required
+        name="state"
+        class="opacity-50 px-4 w-[500px] h-12 outline-none mb-2 bg-slate-50 rounded-lg"
+        id="state"
+      >
+        <option disabled selected value="0">Select state</option>
+        {% for state in states %}
+        <option value="{{ state.id }}">{{ state.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <input
+      class="border rounded-lg w-[500px] h-12 outline-none px-4 mb-2 drop-shadow border']"
+      name="email"
+      type="email"
+      required
+      placeholder="Email"
+    />
+    <input
+      class="border rounded-lg w-[500px] h-12 outline-none px-4 mb-2 drop-shadow border']"
+      name="location"
+      type="text"
+      required
+      placeholder="Location"
+    />
+    <input
+      class="border rounded-lg w-[500px] h-12 outline-none px-4 mb-2 drop-shadow border']"
+      name="password"
+      type="password"
+      required
+      id="password"
+      placeholder="Password"
+    />
+    <input
+      class="border rounded-lg w-[500px] h-10 outline-none px-4 bg-gray-600 text-white font-medium cursor-pointer hover:bg-gray-600/80"
+      type="submit"
+      value="REGISTER"
+    />
+    <p class="text-black opacity-70 mt-2">
+      Already have an Account ?<span
+        ><a
+          class="text-gray-500 ml-2 hover:text-gray-600 font-semibold"
+          href="{% url 'login' %}"
+          >Login</a
+        ></span
+      >
+    </p>
+    <br/>
+    <p class="text-black opacity-70 mt-2">
+      Register As<span
+        ><a
+          class="text-gray-500 ml-2 hover:text-gray-600 font-semibold"
+          href="{% url 'user-register' %}"
+          >User</a
+        ></span
+      >
+    </p>
+  </form>
+</div>
+
+<script>
+  function validateForm() {
+    let name = document.querySelector('input[name="name"]').value.trim();
+    let number = document.querySelector('input[name="number"]').value.trim();
+    let state = document.querySelector('select[name="state"]').value.trim();
+    let email = document.querySelector('input[name="email"]').value.trim();
+    let location = document.querySelector('input[name="location"]').value.trim();
+    let password = document.querySelector('input[name="password"]').value.trim();
+
+    if (!name || name.length === 0) {
+      alert('Please enter your name.');
+      return false;
+    }
+
+    if (!number || number.length !== 10) {
+      alert('Please enter a valid 10-digit contact number.');
+      return false;
+    }
+    
+
+    if (state === '0') {
+      alert('Please select a state.');
+      return false;
+    }
+
+    if (!email || !isValidEmail(email)) {
+      alert('Please enter a valid email address.');
+      return false;
+    }
+
+    if (!location || location.length === 0) {
+      alert('Please enter your location.');
+      return false;
+    }
+
+    if (!password || password.length < 6) {
+      alert('Password should be at least 6 characters long.');
+      return false;
+    }
+
+    return true;
+  }
+
+  function isValidEmail(email) {
+    // Regular expression for email validation
+    const emailRegex = /^[a-z][^\s@]*@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+</script>
+{% endblock content %}

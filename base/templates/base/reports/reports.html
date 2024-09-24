@@ -1,0 +1,226 @@
+{% extends 'index.html' %} {% block content %}
+
+<div class="w-full h-full bg-white rounded-lg">
+  <!-- TITLE -->
+
+  <div class="flex justify-between mx-12 pt-6">
+    <h3 class="font-bold bg-emerald-500 text-white px-4 rounded-lg py-1">
+      REPORTS
+    </h3>
+  </div>
+
+  <div class="bg-gray-200/50 min-h-screen w-full mt-4 mx-auto p-6">
+    <div class="max-w-[1400px] min-h-[200px] bg-white p-4">
+      <div class="flex flex-row items-center">
+        <h1
+          class="border border-red-500 rounded-lg w-[100px] py-0.5 text-red-500 font-semibold text-center px-1"
+        >
+          Alerts ({{open_alerts.count}})
+        </h1>
+        <h1 class="text-sm text-green-500 font-medium ml-2">.Open</h1>
+      </div>
+      <!-- CONTAINER -->
+      {% for open_alert in open_alerts %}
+      <div class="w-full border min-h-[100px] mt-4 flex justify-between p-4">
+        <div>
+          <h1 class="font-bold opacity-60">Created By :</h1>
+          <h1 class="text-sm font-medium opacity-60 mt-3">
+            {{open_alert.host.name}}
+          </h1>
+        </div>
+        <div>
+          <h1 class="font-bold opacity-60">Created At :</h1>
+          <h1 class="text-sm font-medium opacity-60 mt-3">
+            {{open_alert.created}}
+          </h1>
+        </div>
+        <div>
+          <h1 class="font-bold opacity-60">Alert Content :</h1>
+          <h1 class="text-sm font-medium opacity-60 mt-3">
+            {{open_alert.content}}
+          </h1>
+        </div>
+        <div>
+          <h1 class="font-bold opacity-60">State Committee :</h1>
+          <h1 class="text-sm font-medium opacity-60 mt-3">
+            {{open_alert.state_committee}}
+          </h1>
+        </div>
+        <div>
+          <h1 class="font-bold opacity-60">Status :</h1>
+          {% if open_alert.status == 1 %}
+          <h1 class="text-sm font-medium text-green-500 opacity-60 mt-3">
+            Open
+          </h1>
+          {% elif open_alert.status == 2 %}
+          <h1 class="text-sm font-medium opacity-60 text-red-500 mt-3">
+            Closed
+          </h1>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- closed alerts -->
+    <div class="max-w-[1400px] min-h-[200px] bg-white p-4">
+      <div class="flex flex-row items-center">
+        <h1
+          class="border border-red-500 rounded-lg w-[100px] py-0.5 text-red-500 font-semibold text-center px-1"
+        >
+          Alerts ({{close_alerts.count}})
+        </h1>
+        <h1 class="text-sm text-red-500 font-medium ml-2">.Closed</h1>
+      </div>
+      <!-- CONTAINER -->
+      {% for open_alert in close_alerts %}
+      <div class="w-full border min-h-[100px] mt-4 flex justify-between p-4">
+        <div>
+          <h1 class="font-bold opacity-60">Created By :</h1>
+          <h1 class="text-sm font-medium opacity-60 mt-3">
+            {{open_alert.host.name}}
+          </h1>
+        </div>
+        <div>
+          <h1 class="font-bold opacity-60">Created At :</h1>
+          <h1 class="text-sm font-medium opacity-60 mt-3">
+            {{open_alert.created}}
+          </h1>
+        </div>
+        <div>
+          <h1 class="font-bold opacity-60">Alert Content :</h1>
+          <h1 class="text-sm font-medium opacity-60 mt-3">
+            {{open_alert.content}}
+          </h1>
+        </div>
+        <div>
+          <h1 class="font-bold opacity-60">State Committee :</h1>
+          <h1 class="text-sm font-medium opacity-60 mt-3">
+            {{open_alert.state_committee}}
+          </h1>
+        </div>
+        <div>
+          <h1 class="font-bold opacity-60">Status :</h1>
+          {% if open_alert.status == 1 %}
+          <h1 class="text-sm font-medium text-green-500 opacity-60 mt-3">
+            Open
+          </h1>
+          {% elif open_alert.status == 2 %}
+          <h1 class="text-sm font-medium opacity-60 text-red-500 mt-3">
+            Closed
+          </h1>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- open needs -->
+    <div class="max-w-[1400px] min-h-[200px] bg-white p-4">
+      <div class="flex flex-row items-center">
+        <h1
+          class="border border-amber-500 rounded-lg w-[100px] py-0.5 text-amber-500 font-semibold text-center px-1"
+        >
+          Needs ({{open_needs.count}})
+        </h1>
+        <h1 class="text-sm text-green-500 font-medium ml-2">.Open</h1>
+      </div>
+      <!-- CONTAINER -->
+      {% for open_alert in open_needs %}
+      <div class="w-full border min-h-[100px] mt-4 flex justify-between p-4">
+        <div>
+          <h1 class="font-bold opacity-60">Created By :</h1>
+          <h1 class="text-sm font-medium opacity-60 mt-3">
+            {{open_alert.host.name}}
+          </h1>
+        </div>
+        <div>
+          <h1 class="font-bold opacity-60">Created At :</h1>
+          <h1 class="text-sm font-medium opacity-60 mt-3">
+            {{open_alert.created}}
+          </h1>
+        </div>
+        <div>
+          <h1 class="font-bold opacity-60">Alert Content :</h1>
+          <h1 class="text-sm font-medium opacity-60 mt-3">
+            {{open_alert.requirements}}
+          </h1>
+        </div>
+        <div>
+          <h1 class="font-bold opacity-60">State Committee :</h1>
+          <h1 class="text-sm font-medium opacity-60 mt-3">
+            {{open_alert.state_committee}}
+          </h1>
+        </div>
+        <div>
+          <h1 class="font-bold opacity-60">Status :</h1>
+          {% if open_alert.status == 1 %}
+          <h1 class="text-sm font-medium text-green-500 opacity-60 mt-3">
+            Open
+          </h1>
+          {% elif open_alert.status == 2 %}
+          <h1 class="text-sm font-medium opacity-60 text-red-500 mt-3">
+            Closed
+          </h1>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- closed needs -->
+    <div class="max-w-[1400px] min-h-[200px] bg-white p-4">
+      <div class="flex flex-row items-center">
+        <h1
+          class="border border-amber-500 rounded-lg w-[100px] py-0.5 text-amber-500 font-semibold text-center px-1"
+        >
+          Needs ({{close_needs.count}})
+        </h1>
+        <h1 class="text-sm text-red-500 font-medium ml-2">.closed</h1>
+      </div>
+      <!-- CONTAINER -->
+      {% for open_alert in close_needs %}
+      <div class="w-full border min-h-[100px] mt-4 flex justify-between p-4">
+        <div>
+          <h1 class="font-bold opacity-60">Created By :</h1>
+          <h1 class="text-sm font-medium opacity-60 mt-3">
+            {{open_alert.host.name}}
+          </h1>
+        </div>
+        <div>
+          <h1 class="font-bold opacity-60">Created At :</h1>
+          <h1 class="text-sm font-medium opacity-60 mt-3">
+            {{open_alert.created}}
+          </h1>
+        </div>
+        <div>
+          <h1 class="font-bold opacity-60">Alert Content :</h1>
+          <h1 class="text-sm font-medium opacity-60 mt-3">
+            {{open_alert.requirements}}
+          </h1>
+        </div>
+        <div>
+          <h1 class="font-bold opacity-60">State Committee :</h1>
+          <h1 class="text-sm font-medium opacity-60 mt-3">
+            {{open_alert.state_committee}}
+          </h1>
+        </div>
+        <div>
+          <h1 class="font-bold opacity-60">Status :</h1>
+          {% if open_alert.status == 1 %}
+          <h1 class="text-sm font-medium text-green-500 opacity-60 mt-3">
+            Open
+          </h1>
+          {% elif open_alert.status == 2 %}
+          <h1 class="text-sm font-medium opacity-60 text-red-500 mt-3">
+            Closed
+          </h1>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

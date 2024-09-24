@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disaster Information</title>
+    <link rel="stylesheet" href="styles.css">
+
+
+    <style>
+        *{
+            font-family: "Times New Roman", Times, serif; 
+          }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            width: 80px;
+            margin-right: 10px;
+        }
+        
+        .logo h1 {
+            margin: 0;
+        }
+        
+        .main {
+            padding: 40px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="logo.png" alt="Logo">
+                <h1>Disaster Information</h1>
+            </div>
+        </div>
+    </header>
+    <section class="main">
+        <div class="container">
+            <h2>Disasters in Indian States</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Disaster</th>
+                        <th>States Affected</th>
+                        <th>Damage</th>
+                        <th>How to Act</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Floods</td>
+                        <td>Assam, Bihar, Kerala, Maharashtra, Uttar Pradesh</td>
+                        <td>Property damage, loss of life, displacement</td>
+                        <td>Move to higher ground, avoid flooded areas, and listen to local authorities for evacuation orders.</td>
+                    </tr>
+                    <tr>
+                        <td>Cyclones</td>
+                        <td>Odisha, West Bengal, Andhra Pradesh, Tamil Nadu</td>
+                        <td>Wind damage, flooding, power outages</td>
+                        <td>Evacuate if advised. Secure loose objects, board up windows, and stay indoors during the storm.</td>
+                    </tr>
+                    <!-- Add more rows for other disasters -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+</body>
+</html>

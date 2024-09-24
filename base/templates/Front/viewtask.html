@@ -1,0 +1,17 @@
+{% extends 'home.html' %} {% block content %}
+
+<main class="w-screen h-full mt-6"> 
+  <input
+    type="hidden"
+    name="latlong"
+    id="latlongTextField"
+    class="form-control"
+    value="{{coordinates.latitude}},{{coordinates.longitude}}"
+  />
+
+  <div class="row mt-3 flex justify-center mb-5">
+    <div id="map"></div>
+  </div>
+</main>
+
+{% endblock content %}

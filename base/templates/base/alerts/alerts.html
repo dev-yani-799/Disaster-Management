@@ -1,0 +1,297 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<div class="w-full h-full bg-white rounded-lg">
+
+    <!-- TITLE -->
+
+    <div class="flex justify-between mx-12 pt-6">
+        <h3 class="font-bold bg-amber-500 text-white px-4 rounded-lg py-1">
+          Pending Alert
+        </h3>
+        
+        <!-- <a href="#" class="border border-stone-950 rounded-lg px-4 py-1 dropshadow text-zinc-900 font-medium hover:bg-black hover:text-white">Add Volunteer</a> -->
+    </div>
+
+    <!-- TABLE STARTS -->
+   
+   <!--  <h3 class="mx-12 mt-3 bg-amber-500 text-white text-sm font-bold px-2 py-2 w-[180px] text-center rounded-lg">Pending Requests</h3> -->
+    
+{% if pendingAlerts %}
+
+<table class="table w-full mt-4">
+    <!-- TABLE HEAD -->
+    <thead class="table-head bg-amber-500 h-14 ">
+        <tr class="bg-gray-400 ">
+            <th>#</th>
+            <th>Volunteer</th>
+            <th>Contact Number</th>
+            <th>Location</th>
+            <th>Content</th>
+            <th></th>
+            <th></th>
+            <th>Status</th>
+         
+            <th>Actions</th>
+           
+        </tr>
+    </thead>
+
+    <!-- TABLE HEAD ENDS -->
+    
+    <!-- TABLE BODY -->
+    <tbody >
+        <!-- ITEM -->
+       
+       
+   
+        
+       {% for pendingAlert in pendingAlerts %}
+   
+        
+      
+        
+        <tr class="odd:bg-gray-100 even:bg-white ">
+            <!-- NAME -->
+            <th class="py-4"><p class="text-black font-semibold text-base">{{forloop.counter}}</p></th>
+            <th class="py-4"><p class="text-black font-semibold text-base">{{pendingAlert.host.name}}</p></th>
+            <th class="py-4"><p class="text-black font-semibold text-base">{{pendingAlert.host.phone}}</p></th>
+            <th class="py-4"><p class="text-black font-semibold text-base">{{pendingAlert.host.location}}</p></th>
+            <th class="py-4"><p class="text-black font-semibold text-base">{{pendingAlert.content}}</p></th>
+            <th class="py-4"><p class="text-black font-semibold text-base">{{data.latitude}}</p></th>
+            <th class="py-4"><p class="text-black font-semibold text-base">{{data.longitude}}</p></th>
+
+         
+            <th class="py-4"><p class="text-black font-semibold text-base"><i class="fa-regular fa-circle-check text-green-600"></i>
+                Verified by {{pendingAlert.state_committee.name}} <span  class="text-sm opacity-50">(1m ago)</span></p></th>
+            <th class="py-4">
+               
+                {% comment %} <a href="{% url 'approve-alert' pendingAlert.id %}" class=" border border-green-600 text-green-600 rounded-lg px-4 py-1 hover:bg-green-600 mr-4 hover:text-white font-semibold text-sm">Verify</a> {% endcomment %}
+                
+                <a href="{% url 'reject-alert' pendingAlert.id %}" class=" border border-red-600 text-red-600 rounded-lg px-4 py-1 hover:bg-red-600 hover:text-white font-semibold text-sm">close</a>
+                {% if request.user.user_type == 1  %}
+                
+                <a href="{% url 'Assign_Voluenteers_byadmin' pendingAlert.id %}" class=" border border-blue-600 text-blue-600 rounded-lg px-4 py-1 hover:bg-blue-600 mr-4 hover:text-white font-semibold text-sm m-2">Assign</a>
+                
+                {% endif %}
+       
+            </th>
+    
+      
+        {% endfor %}
+        {% for data in data %}
+        {% if data.is_verified_by_state != 1 %}
+
+        
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+          
+        <th class="py-4"><p class="text-black font-semibold text-base">{{data.latitude}}</p></th>
+        <th class="py-4"><p class="text-black font-semibold text-base">{{data.longitude}}</p></th>
+
+
+        
+        <th class="py-4">
+               
+            {% comment %} <a href="{% url 'approve-alert' pendingAlert.id %}" class=" border border-green-600 text-green-600 rounded-lg px-4 py-1 hover:bg-green-600 mr-4 hover:text-white font-semibold text-sm">Verify</a> {% endcomment %}
+            
+            <a href="{% url 'reject-alert' data.id %}" class=" border border-red-600 text-red-600 rounded-lg px-4 py-1 hover:bg-red-600 hover:text-white font-semibold text-sm">close</a>
+           
+            
+            <a href="{% url 'Assign_Voluenteers_byadmin' data.id %}" class=" border border-blue-600 text-blue-600 rounded-lg px-4 py-1 hover:bg-blue-600 mr-4 hover:text-white font-semibold text-sm m-2">Assign</a>
+            
+        
+   
+        </th>
+
+    </tr>
+    {% endif %}
+    {% endfor %}
+       
+    </tbody>
+    <!-- TABLE BODY ENDS -->
+</table>
+{% else %}
+<div class="w-full h-32 bg-gray-200/70 flex justify-center items-center mt-6">
+    <h3 class="text-xl font-bold opacity-60">No Pending Alerts</h3>
+</div>
+{% endif %}
+
+
+
+<!-- ACTIVE NEEDS -->
+
+ <!-- TITLE -->
+
+ <div class="flex justify-between mx-12 pt-6">
+    <h3 class="font-bold bg-green-600 text-white px-4 rounded-lg py-1">
+     Active Alerts
+    </h3>
+    
+    
+</div>
+
+{% if openAlerts %}
+
+
+
+<table class="table w-full mt-4">
+    <!-- TABLE HEAD -->
+    <thead class="table-head bg-amber-500 h-14 ">
+        <tr class="bg-gray-400 ">
+            <th>#</th>
+            <th>Volunteer</th>
+            <th>Contact Number</th>
+            <th>Location</th>
+            <th>content</th>
+            {% if request.user.user_type == 0 %}
+            <th>State Committee</th>
+            {% endif %}
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <!-- TABLE HEAD ENDS -->
+    
+    <!-- TABLE BODY -->
+    <tbody >
+        <!-- ITEM -->
+       
+       
+   
+        
+       {% for openAlert in openAlerts %}
+   
+        
+        
+        
+        <tr class="odd:bg-gray-100 even:bg-white ">
+            <!-- NAME -->
+            <th class="py-4"><p class="text-black font-semibold text-base">{{forloop.counter}}</p></th>
+            <th class="py-4"><p class="text-black font-semibold text-base">{{openAlert.host.name}}</p></th>
+            <th class="py-4"><p class="text-black font-semibold text-base">{{openAlert.host.phone}}</p></th>
+            <th class="py-4"><p class="text-black font-semibold text-base">{{openAlert.host.location}}</p></th>
+            <th class="py-4"><p class="text-black font-semibold text-base">{{openAlert.content}}</p></th>
+            {% if request.user.user_type == 0 %}
+            <th class="py-4"><p class="text-black font-semibold text-base">{{openAlert.state_committee.name}}</p></th>
+            {% endif %}
+            <th class="py-4"><p class="text-green-600 font-semibold text-base">Open <span  class="text-sm opacity-50">({{openAlert.updated|timesince}} ago)</span></p></th>
+            <th class="py-4">
+                <!-- <a href="#" class="border border-green-600 rounded-lg px-4 py-1 bg-red mr-4 test-xs font-normal hover:bg-green-600  hover:text-white">Edit</a> -->
+                
+                <a href="{% url 'reject-alert' openAlert.id %}" class=" border border-red-600 text-red-600 rounded-lg px-4 py-1 hover:bg-red-600 hover:text-white font-semibold text-sm">close</a>
+            </th>
+        </tr>
+      
+        {% endfor %}
+        
+       
+       
+    </tbody>
+    <!-- TABLE BODY ENDS -->
+</table>
+{% else %}
+<div class="w-full h-32 bg-gray-200/70 flex justify-center items-center mt-6">
+    <h3 class="text-xl font-bold opacity-60">No Active Alerts</h3>
+</div>
+{% endif %}
+
+ <!-- TITLE -->
+
+ <div class="flex justify-between mx-12 mt-6 pt-6">
+    <h3 class="font-bold bg-red-500 text-white px-4 rounded-lg py-1">
+     Closed Alerts
+    </h3>
+    
+    <!-- <a href="#" class="border border-stone-950 rounded-lg px-4 py-1 dropshadow text-zinc-900 font-medium hover:bg-black hover:text-white">Add Volunteer</a> -->
+</div>
+
+{% if closedAlerts %}
+<table class="table w-full mt-4">
+    <!-- TABLE HEAD -->
+    <thead class="table-head bg-amber-500 h-14 ">
+        <tr class="bg-gray-400 ">
+            <th>#</th>
+            <th>Volunteer</th>
+            <th>Contact Number</th>
+            <th>Location</th>
+            <th>Content</th>
+            {% if request.user.user_type == 0 %}
+            <th>State Committee</th>
+            {% endif %}
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <!-- TABLE HEAD ENDS -->
+    
+    <!-- TABLE BODY -->
+    <tbody >
+        <!-- ITEM -->
+       
+       
+   
+        
+       {% for closedAlert in closedAlerts %}
+   
+        
+        
+        
+        <tr class="odd:bg-gray-100 even:bg-white ">
+            <!-- NAME -->
+            <th class="py-4"><p class="text-black font-semibold text-base">{{forloop.counter}}</p></th>
+            <th class="py-4"><p class="text-black font-semibold text-base">{{closedAlert.host.name}}</p></th>
+            <th class="py-4"><p class="text-black font-semibold text-base">{{closedAlert.host.phone}}</p></th>
+            <th class="py-4"><p class="text-black font-semibold text-base">{{closedAlert.host.location}}</p></th>
+            <th class="py-4"><p class="text-black font-semibold text-base">{{closedAlert.requirements}}</p></th>
+            {% if request.user.user_type == 0 %}
+            <th class="py-4"><p class="text-black font-semibold text-base">{{closedAlert.state_committee.name}}</p></th>
+            {% endif %}
+            <th class="py-4"><p class="text-red-500 font-bold text-base">Closed by
+
+                 {% if closedAlert.rejected_by == 0 %}
+                 <p>Admin </p>
+                 {% elif closedAlert.rejected_by == 1 %}
+                 <p>{{closedAlert.state_committee.name}} State Committee</p>
+                 {% elif closedAlert.rejected_by == 2 %}
+                <p> {{closedAlert.host.name}}</p>
+                 {% endif %}
+
+                 <span  class="text-sm opacity-50">({{closedAlert.updated|timesince}} ago)</span></p></th>
+            <th class="py-4">
+                
+                
+                <a href="{% url 'delete-alert' closedAlert.id %}" class=" border border-red-600 text-red-600 rounded-lg px-4 py-1 hover:bg-red-600 hover:text-white font-semibold text-sm">Delete</a>
+            </th>
+        </tr>
+      
+        {% endfor %}
+        
+       
+       
+    </tbody>
+    <!-- TABLE BODY ENDS -->
+</table>
+{% else %}
+
+<div class="w-full h-32 bg-gray-200/70 flex justify-center items-center mt-6">
+    <h3 class="text-xl font-bold opacity-60">No Closed Alerts</h3>
+</div>
+
+{% endif %}
+
+
+    
+</div>
+
+
+
+{% endblock content %}

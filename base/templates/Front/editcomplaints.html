@@ -1,0 +1,36 @@
+{% extends 'home.html' %} {% block content %}
+<main class="w-screen h-full mt-6">
+    <div class="">
+      <div class="w-full h-60 bg-white items-center flex justify-center">
+        <form
+          method="POST"
+          action=""
+          class="drop-shadow items-center justify-center"
+        >
+        {% csrf_token %}
+       
+          <textarea
+          required
+            autofocus
+            required
+            class="border p-3 outline-none"
+            name="compaint"
+            id=""
+            cols="60"
+            rows="5"
+            placeholder="Tell Us What is your complaint ? "
+          >{{ edit.compaint }}</textarea>
+          <div class="flex mt-4">
+            <input
+              class="cursor-pointer hover:bg-gray-500/80 text-sm font-bold text-white bg-gray-500 rounded px-20 w-full py-3"
+              type="submit"
+              value="SEND COMPLAINT"
+            />
+          </div>
+        </form>
+      </div>
+    </div> 
+
+
+
+{% endblock content %}

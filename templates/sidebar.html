@@ -1,0 +1,104 @@
+  
+  {% load static %}
+  
+  <!-- start sidebar -->
+  <div id="sideBar" class="relative flex flex-col flex-wrap bg-white border-r border-gray-300 p-6 flex-none w-64   md:-ml-64 md:fixed md:top-0 md:z-30 md:h-screen md:shadow-xl animated faster">
+    
+
+    <!-- sidebar content -->
+    <div class="flex flex-col h-[100vh]">
+
+      <!-- sidebar toggle -->
+      <div class="text-right hidden md:block mb-4">
+        <button id="sideBarHideBtn">
+          <i class="fad fa-times-circle"></i>
+        </button>
+      </div>
+      <!-- end sidebar toggle -->
+
+      <!-- <p class="uppercase text-xs text-gray-600 mb-4 tracking-wider">homes</p> -->
+
+      <!-- link -->
+      <a href="{% url 'home' %}" class="mb-3 pb-2 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+        <i class="fad fa-chart-pie text-xs mr-2"></i>                
+        users
+      </a>
+      <!-- end link -->
+      {% comment %} {% url 'viewallalerts' %} {% endcomment %}
+      <!-- link -->
+      
+      {% if request.user.user_type == 0 %}
+      <a href="{% url 'statecommittee' %}" class="mb-3 pb-2 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+        <i class="fad fa-shopping-cart text-xs mr-2"></i>
+        State Committee
+      </a>
+      <a href="{% url 'viewallalerts' %}" class="mb-3 pb-2 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+        <i class="fad fa-shopping-cart text-xs mr-2"></i>
+        GIS Map
+      </a>
+      <a href="{% url 'view-certificate' %}" class="mb-3 pb-2 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+        <i class="fad fa-shopping-cart text-xs mr-2"></i>
+        Certificates
+      </a>
+      <a href="{% url 'view_estimateamount' %}" class="mb-3 pb-2  capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+        <i class="fad fa-comments text-xs mr-2"></i>
+        View Estimation
+      </a>
+      <a href="{% url 'view_climuseradmin' %}" class="mb-3 pb-2 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+        <i class="fad fa-shield-check text-xs mr-2"></i>
+        View Claims
+      </a>
+      <a href="{% url 'view_complaints_by_admin' %}" class="mb-3 pb-2 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+        <i class="fad fa-shield-check text-xs mr-2"></i>
+        View Complaints
+      </a>
+      {% endif %}
+      <!-- end link -->
+
+      <!-- <p class="uppercase text-xs text-gray-600 mb-4 mt-4 tracking-wider">apps</p> -->
+
+      <!-- link -->
+      <a href="{% url 'volunteer' %}" class="mb-3 pb-2 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+        <i class="fad fa-envelope-open-text text-xs mr-2"></i>
+        Volunteers
+      </a>
+      <!-- end link -->
+
+      <!-- link -->
+
+      {% comment %} <a href="{% url 'viewallalerts' %}" class="mb-3 pb-2  capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+        <i class="fad fa-comments text-xs mr-2"></i>
+        Spotted Alert
+      </a> {% endcomment %}
+      
+      <a href="{% url 'alerts' %}" class="mb-3 pb-2  capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+        <i class="fad fa-comments text-xs mr-2"></i>
+        Alerts
+      </a>
+      <!-- end link -->
+
+      <!-- link -->
+      <a href="{% url 'needs' %}" class="mb-3 pb-2 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+        <i class="fad fa-shield-check text-xs mr-2"></i>
+        Needs
+      </a>
+      <!-- end link -->
+
+      <!-- link -->
+
+      <a href="{% url 'view-report' %}" class="mb-3 pb-2 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+        <i class="fad fa-calendar-edit text-xs mr-2"></i>
+        Reports
+      </a>
+      
+      <!-- end link -->
+
+     
+      
+      
+
+    </div>
+    <!-- end sidebar content -->
+
+  </div>
+  <!-- end sidbar -->
